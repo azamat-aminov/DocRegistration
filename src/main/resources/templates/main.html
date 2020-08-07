@@ -6,9 +6,9 @@
 </head>
 <body>
 <h1>Регистрации документа</h1>
-<form action="/someUrl" method="post">
-    <label for="id1">Рег. №</label><input type="text" id="id1" name="registerNumber"><br>
-    <label for="id2">Дата рег.</label><input type="date" id="id2" name="registerDate"><br>
+<form action="/someUrl" method="post" name="myForm" onsubmit="return validateRegNum() && compareDate()">
+    <label for="id1">Рег. №</label><input type="text" id="id1" name="registerNumber" required><br>
+    <label for="id2">Дата рег.</label><input type="date" id="id2" name="registerDate" required><br>
     <label for="id3">№ исх. док-та</label><input type="text" id="id3" name="leaveRegisterNumber"><br>
     <label for="id4">Дата исх. док-та</label><input type="date" id="id4" name="leaveDate"><br>
     <label for="select">Форма доставки: </label><br>
@@ -18,14 +18,14 @@
         <option value="tel">Телефонограмма</option>
     </select><br>
     <label for="correspondent">Корреспондент: </label><br>
-    <select id="correspondent" name="correspondent">
+    <select id="correspondent" name="correspondent" required>
         <option value="courier">Курьер</option>
         <option value="email">Email</option>
         <option value="tel">Телефонограмма</option>
     </select><br>
     <!--    <label for="text">Тема</label><input type="text" id="text" maxlength="100"><br>-->
     <label for="textarea1">Тема</label>
-    <textarea id="textarea1" name="topic" rows="4" cols="40" maxlength="100"></textarea><br>
+    <textarea id="textarea1" name="topic" rows="4" cols="40" maxlength="100" required></textarea><br>
     <!--    <label for="text2">Описание</label><input type="text" id="text2" maxlength="1000"><br>-->
     <label for="textarea">Описание</label>
     <textarea id="textarea" name="description" rows="4" cols="40" maxlength="1000"></textarea><br>
@@ -45,9 +45,40 @@
     <label>
         <input type="radio" name="control" checked>
     </label>Нет</input><br>
-    <label for="file">Select file</label><input type="file" name="file" id="file"><br><br>
+    <label for="file">Select file</label><input type="file" name="file" id="file"
+                                                onchange="validateSize(this)"><br><br>
     <button type="submit" value="save">Сохранить</button>
     <button type="submit" value="exit">Закрыть</button>
 </form>
+<script>
+    function validateRegNum() {
+        const x = document.forms["myForm"]["registerNumber"].value;
+        const regExp = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
+        let isValid = !!x.match(regExp);
+
+        if (!isValid) {
+            alert("wrong text!")
+        }
+        return isValid;
+    }
+
+    function compareDate() {
+        const dateRegistration = document.getElementById("id2").value;
+        const periodOfExecution = document.getElementById("id5").value;
+        let b = new Date(periodOfExecution) > new Date(dateRegistration);
+        if (!b) {
+            alert("wrong date!")
+        }
+        return b;
+    }
+
+    function validateSize(file) {
+        const FileSize = file.files[0].size / 1024 / 1024; // in MB
+        if (FileSize > 1) {
+            alert('File size exceeds 1 MB. Please choose file less than 1 MB');
+            return false;
+        }
+    }
+</script>
 </body>
 </html>
