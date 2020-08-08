@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,18 +11,31 @@
     <label for="id2">Дата рег.</label><input type="date" id="id2" name="registerDate" required><br>
     <label for="id3">№ исх. док-та</label><input type="text" id="id3" name="leaveRegisterNumber"><br>
     <label for="id4">Дата исх. док-та</label><input type="date" id="id4" name="leaveDate"><br>
-    <label for="select">Форма доставки: </label><br>
-    <select id="select" name="formDelivery">
-        <option value="courier">Курьер</option>
-        <option value="email">Email</option>
-        <option value="tel">Телефонограмма</option>
-    </select><br>
-    <label for="correspondent">Корреспондент: </label><br>
-    <select id="correspondent" name="correspondent" required>
-        <option value="courier">Курьер</option>
-        <option value="email">Email</option>
-        <option value="tel">Телефонограмма</option>
-    </select><br>
+
+    <td>Форма доставки:</td>
+    <td>
+        <label>
+            <select>
+                <option th:each="deliveryType : ${forms}"
+                        th:value="${deliveryType.id}"
+                        th:utext="${deliveryType.name}"
+                ></option>
+            </select>
+        </label>
+    </td>
+    <br>
+
+    <td>Корреспондент:</td>
+    <td>
+        <label>
+            <select>
+                <option th:each="correspondentType : ${correspondents}"
+                        th:value="${correspondentType.id}"
+                        th:utext="${correspondentType.name}"
+                ></option>
+            </select>
+        </label>
+    </td><br>
     <!--    <label for="text">Тема</label><input type="text" id="text" maxlength="100"><br>-->
     <label for="textarea1">Тема</label>
     <textarea id="textarea1" name="topic" rows="4" cols="40" maxlength="100" required></textarea><br>
