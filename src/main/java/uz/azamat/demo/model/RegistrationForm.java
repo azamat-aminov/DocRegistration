@@ -15,5 +15,7 @@ public class RegistrationForm {
     private String executionPeriod;
     private Boolean access;
     private Boolean control;
+    private String fileName;
+    private String fileRelPath;
     private MultipartFile file;
 }
