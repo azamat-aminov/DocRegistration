@@ -4,8 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 import uz.azamat.demo.controller.service.CorrespondentTypeService;
 import uz.azamat.demo.controller.service.DeliveryService;
+import uz.azamat.demo.controller.service.RegistrationFormService;
 import uz.azamat.demo.model.CorrespondentType;
 import uz.azamat.demo.model.DeliveryType;
 import uz.azamat.demo.model.RegistrationForm;
@@ -19,6 +21,9 @@ public class DocController {
     DeliveryService deliveryService;
     @Resource
     CorrespondentTypeService correspondentTypeService;
+    @Resource
+    RegistrationFormService registrationFormService;
+
     @GetMapping()
     public String display() {
         return "welcome";
@@ -36,7 +41,13 @@ public class DocController {
 
     @PostMapping("/someUrl")
     public String someMethod(RegistrationForm registrationForm) {
-        System.out.println(registrationForm.getRegisterNumber());
+//        System.out.println(registrationForm.getRegisterNumber());
+        MultipartFile file = registrationForm.getFile();
+        String relPath = "files/" + file;
+        registrationForm.setFileRelPath(relPath);
+        registrationForm.setFileName(file.getOriginalFilename());
+        System.out.println(file.getOriginalFilename());
+        registrationFormService.saveAllData(registrationForm);
         return "main";
     }
 }
