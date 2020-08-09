@@ -4,6 +4,9 @@ public class DeliveryType {
     private int id;
     private String name;
 
+    public DeliveryType() {
+    }
+
     public DeliveryType(int id, String name) {
         this.id = id;
         this.name = name;

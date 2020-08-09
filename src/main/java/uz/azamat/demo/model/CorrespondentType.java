@@ -4,6 +4,9 @@ public class CorrespondentType {
     private int id;
     private String name;
 
+    public CorrespondentType() {
+    }
+
     public CorrespondentType(int id, String name) {
         this.id = id;
         this.name = name;
