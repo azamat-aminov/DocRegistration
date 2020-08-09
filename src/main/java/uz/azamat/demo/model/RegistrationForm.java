@@ -1,6 +1,6 @@
 package uz.azamat.demo.model;
 
-import java.io.File;
+import org.springframework.web.multipart.MultipartFile;
 
 public class RegistrationForm {
     private String registerNumber;
@@ -14,7 +14,7 @@ public class RegistrationForm {
     private String executionPeriod;
     private Boolean access;
     private Boolean control;
-    private File file;
+    private MultipartFile file;
 
     public String getRegisterNumber() {
         return registerNumber;
@@ -115,11 +115,11 @@ public class RegistrationForm {
         return this;
     }
 
-    public File getFile() {
+    public MultipartFile getFile() {
         return file;
     }
 
-    public RegistrationForm setFile(File file) {
+    public RegistrationForm setFile(MultipartFile file) {
         this.file = file;
         return this;
     }
