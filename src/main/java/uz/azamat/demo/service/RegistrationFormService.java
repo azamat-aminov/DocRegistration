@@ -7,6 +7,10 @@ import uz.azamat.demo.dao.RegistrationFormDao;
 import uz.azamat.demo.model.IncomingDocuments;
 import uz.azamat.demo.model.RegistrationForm;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 
 @Service
@@ -14,7 +18,7 @@ public class RegistrationFormService {
     @Autowired
     RegistrationFormDao registrationFormDao;
 
-    public void saveAllData(RegistrationForm registrationForm) {
+    public void saveAllData(RegistrationForm registrationForm) throws IOException {
         //
         IncomingDocuments doc = new IncomingDocuments();
         String registerNumber = registrationForm.getRegisterNumber();
@@ -54,7 +58,9 @@ public class RegistrationFormService {
         doc.setControl(control);
 
         MultipartFile file = registrationForm.getFile();
-
+        byte[] bytes = file.getBytes();
+        Path path = Paths.get("/home/azamat/docs/" + file.getOriginalFilename());
+        Files.write(path, bytes);
         String fileName = file.getOriginalFilename();
         doc.setFileName(fileName);
 

@@ -15,6 +15,7 @@ import uz.azamat.demo.model.DeliveryType;
 import uz.azamat.demo.model.RegistrationForm;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -42,9 +43,7 @@ public class DocController {
     }
 
     @PostMapping("/saveDocs")
-    public String someMethod(RegistrationForm registrationForm) {
-//        System.out.println(registrationForm.getRegisterNumber());
-        System.out.println(registrationForm.getFile());
+    public String someMethod(RegistrationForm registrationForm) throws IOException {
         registrationFormService.saveAllData(registrationForm);
         return "main";
     }
