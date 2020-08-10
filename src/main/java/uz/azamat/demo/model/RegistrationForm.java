@@ -10,11 +10,11 @@ public class RegistrationForm {
     private String leaveDate;
     private String formDelivery;
     private String correspondent;
-    private String topic;
     private String description;
     private String executionPeriod;
-    private Boolean access;
-    private Boolean control;
+    private String topic;
+    private int access;
+    private int control;
     private String fileName;
     private String fileRelPath;
     private MultipartFile file;
