@@ -1,5 +1,5 @@
 # DocRegistration
-
+In this project you save all information about your documents to database
 # Used technologies
 
 - Java
@@ -9,5 +9,7 @@
 - Thymeleaf
 
 - MySql
+
+- Javascript
 
 - HTML
