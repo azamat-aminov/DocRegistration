@@ -7,7 +7,8 @@
 </head>
 <body>
 <h1>Регистрация входящего документа</h1>
-<form action="/saveDocs" method="post" name="myForm" onsubmit="return validateRegNum() && compareDate()">
+<form action="/saveDocs" method="post" enctype="multipart/form-data" name="myForm"
+      onsubmit="return validateRegNum() && compareDate()">
     <label for="id1">Рег. №</label><input type="text" id="id1" name="registerNumber" required><br>
     <label for="id2">Дата рег.</label><input type="date" id="id2" name="registerDate" required><br>
     <label for="id3">№ исх. док-та</label><input type="text" id="id3" name="leaveRegisterNumber"><br>
@@ -16,7 +17,7 @@
     <td>Форма доставки:</td>
     <td>
         <label>
-            <select>
+            <select name="formDelivery" id="formDelivery">
                 <option th:each="deliveryType : ${forms}"
                         th:value="${deliveryType.id}"
                         th:utext="${deliveryType.name}"
@@ -29,37 +30,43 @@
     <td>Корреспондент:</td>
     <td>
         <label>
-            <select>
+            <select name="correspondent" id="correspondent">
                 <option th:each="correspondentType : ${correspondents}"
                         th:value="${correspondentType.id}"
                         th:utext="${correspondentType.name}"
                 ></option>
             </select>
         </label>
-    </td><br>
+    </td>
+    <br>
     <!--    <label for="text">Тема</label><input type="text" id="text" maxlength="100"><br>-->
     <label for="topic">Тема</label>
-<!--    <textarea id="textarea1" name="topic" rows="4" cols="40" maxlength="100" required></textarea><br>-->
+    <!--    <textarea id="textarea1" name="topic" rows="4" cols="40" maxlength="100" required></textarea><br>-->
     <input type="text" name="topic" id="topic" maxlength="100" required><br>
     <!--    <label for="text2">Описание</label><input type="text" id="text2" maxlength="1000"><br>-->
     <label for="textarea">Описание</label>
     <textarea id="textarea" name="description" rows="4" cols="40" maxlength="1000"></textarea><br>
     <label for="id5">Срок исполнения</label><input type="date" id="id5" name="executionPeriod"><br>
     Доступ:
+    Yes
     <label>
-        <input type="radio" name="access">
-    </label>Да</input>
+        <input type="radio" name="access" value="1">
+    </label>
+    No
     <label>
-        <input type="radio" name="access" checked>
-    </label>Нет</input><br>
+        <input type="radio" name="access" value="0" checked>
+    </label><br>
 
     Контроль:
+    Yes
     <label>
-        <input type="radio" name="control">
-    </label>Да</input>
+        <input type="radio" name="control" value="1">
+    </label>
+    No
     <label>
-        <input type="radio" name="control" checked>
-    </label>Нет</input><br>
+        <input type="radio" name="control" value="0" checked>
+    </label><br>
+
     <label for="file">Select file</label><input type="file" accept="application/pdf, application/msword" name="file"
                                                 id="file" onchange="return validateSize(this)"><br><br>
     <button type="submit" onclick="return validateExtension()" value="save">Сохранить</button>
