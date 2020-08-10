@@ -20,8 +20,8 @@ public class RegistrationFormRowMapper implements RowMapper<RegistrationForm> {
         registrationForm.setTopic(resultSet.getString("THEME"));
         registrationForm.setDescription(resultSet.getString("DESCRIPTION"));
         registrationForm.setExecutionPeriod(resultSet.getString("DUE_DATE"));
-        registrationForm.setAccess(resultSet.getBoolean("ACCESS"));
-        registrationForm.setControl(resultSet.getBoolean("CONTROL"));
+        registrationForm.setAccess(resultSet.getInt("ACCESS"));
+        registrationForm.setControl(resultSet.getInt("CONTROL"));
         registrationForm.setFileName(resultSet.getString("FILE_NAME"));
         registrationForm.setFileRelPath(resultSet.getString("FILE_REL_PATH"));
 
