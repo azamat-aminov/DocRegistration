@@ -16,8 +16,9 @@ public class RegistrationFormImpl implements RegistrationFormDao {
     }
 
     @Override
-    public List<RegistrationForm> getAllData() {
-        return null;
+    public List<IncomingDocuments> getAllData() {
+        String query = "SELECT * FROM incoming_docs";
+        return jdbcTemplate.query(query, new RegistrationFormRowMapper());
     }
 
     @Override

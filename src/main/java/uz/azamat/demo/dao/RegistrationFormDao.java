@@ -6,7 +6,7 @@ import uz.azamat.demo.model.RegistrationForm;
 import java.util.List;
 
 public interface RegistrationFormDao {
-    List<RegistrationForm> getAllData();
+    List<IncomingDocuments> getAllData();
 
     void save(IncomingDocuments incomingDocuments);
 }

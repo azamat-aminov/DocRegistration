@@ -1,29 +1,30 @@
 package uz.azamat.demo.dao;
 
 import org.springframework.jdbc.core.RowMapper;
+import uz.azamat.demo.model.IncomingDocuments;
 import uz.azamat.demo.model.RegistrationForm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RegistrationFormRowMapper implements RowMapper<RegistrationForm> {
+public class RegistrationFormRowMapper implements RowMapper<IncomingDocuments> {
     @Override
-    public RegistrationForm mapRow(ResultSet resultSet, int i) throws SQLException {
-        RegistrationForm registrationForm = new RegistrationForm();
+    public IncomingDocuments mapRow(ResultSet resultSet, int i) throws SQLException {
+        IncomingDocuments registrationForm = new IncomingDocuments();
 
         registrationForm.setRegisterNumber(resultSet.getString("REGISTER_NUM"));
-        registrationForm.setRegisterDate(resultSet.getString("REGISTER_DATE"));
-        registrationForm.setLeaveRegisterNumber(resultSet.getString("OUTGOING_NUM"));
-        registrationForm.setLeaveDate(resultSet.getString("OUTGOING_DATE"));
-        registrationForm.setFormDelivery(resultSet.getString("DELIVERY_TYPE"));
-        registrationForm.setCorrespondent(resultSet.getString("CORRESPONDENT"));
-        registrationForm.setTopic(resultSet.getString("THEME"));
+        registrationForm.setRegisterDate(resultSet.getDate("REGISTER_DATE"));
+        registrationForm.setOutgoingNumber(resultSet.getString("OUTGOING_NUM"));
+        registrationForm.setOutgoingDate(resultSet.getDate("OUTGOING_DATE"));
+        registrationForm.setDeliveryType(resultSet.getInt("DELIVERY_TYPE"));
+        registrationForm.setCorrespondent(resultSet.getInt("CORRESPONDENT"));
+        registrationForm.setTheme(resultSet.getString("THEME"));
         registrationForm.setDescription(resultSet.getString("DESCRIPTION"));
-        registrationForm.setExecutionPeriod(resultSet.getString("DUE_DATE"));
+        registrationForm.setDueDate(resultSet.getDate("DUE_DATE"));
         registrationForm.setAccess(resultSet.getInt("ACCESS"));
         registrationForm.setControl(resultSet.getInt("CONTROL"));
         registrationForm.setFileName(resultSet.getString("FILE_NAME"));
-        registrationForm.setFileRelPath(resultSet.getString("FILE_REL_PATH"));
+        registrationForm.setFilePathName(resultSet.getString("FILE_REL_PATH"));
 
         return registrationForm;
     }
