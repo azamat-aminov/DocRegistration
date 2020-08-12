@@ -47,11 +47,8 @@ public class DocController {
     }
 
     @GetMapping("/getAllDocs")
-    public String getAllDocs() {
-        List<IncomingDocuments> allData = registrationFormService.getAllData();
-        for (IncomingDocuments in : allData){
-            System.out.println(in);
-        }
-        return "main";
+    public String getAllDocs(Model model) {
+        model.addAttribute("allData", registrationFormService.getAllData());
+        return "allData";
     }
 }
