@@ -70,7 +70,7 @@ public class RegistrationFormService {
         String fileName = file.getOriginalFilename();
         doc.setFileName(fileName);
 
-        String relPath = "files/" + file;
+        String relPath = "docs/" + file;
         doc.setFilePathName(relPath);
 
         registrationFormDao.save(doc);
