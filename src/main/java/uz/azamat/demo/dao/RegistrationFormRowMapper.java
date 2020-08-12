@@ -11,7 +11,7 @@ public class RegistrationFormRowMapper implements RowMapper<IncomingDocuments> {
     @Override
     public IncomingDocuments mapRow(ResultSet resultSet, int i) throws SQLException {
         IncomingDocuments registrationForm = new IncomingDocuments();
-
+        registrationForm.setId(resultSet.getInt("ID"));
         registrationForm.setRegisterNumber(resultSet.getString("REGISTER_NUM"));
         registrationForm.setRegisterDate(resultSet.getDate("REGISTER_DATE"));
         registrationForm.setOutgoingNumber(resultSet.getString("OUTGOING_NUM"));

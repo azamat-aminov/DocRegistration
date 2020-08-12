@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 @Data
 public class RegistrationForm {
+    private int id;
     private String registerNumber;
     private String registerDate;
     private String leaveRegisterNumber;

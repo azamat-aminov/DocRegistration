@@ -5,6 +5,7 @@ import lombok.Data;
 import java.sql.Date;
 @Data
 public class IncomingDocuments {
+    private int id;
     private String registerNumber;
     private Date registerDate;
     private String outgoingNumber;

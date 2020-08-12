@@ -26,7 +26,10 @@ public class RegistrationFormService {
 
     public void saveAllData(RegistrationForm registrationForm) throws IOException {
         //
+
         IncomingDocuments doc = new IncomingDocuments();
+        doc.setId(registrationForm.getId());
+
         String registerNumber = registrationForm.getRegisterNumber();
         doc.setRegisterNumber(registerNumber);
 
