@@ -3,71 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+<!--    <link rel="stylesheet" href="style.css" media="screen" type="text/css">-->
+        <link th:href="@{/styles/cssandjs/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <h1>Регистрация входящего документа</h1>
-<form action="/saveDocs" method="post" enctype="multipart/form-data" name="myForm"
-      onsubmit="return validateRegNum() && compareDate()">
-    <label for="id1">Рег. №</label><input type="text" id="id1" name="registerNumber" required><br>
-    <label for="id2">Дата рег.</label><input type="date" id="id2" name="registerDate" required><br>
-    <label for="id3">№ исх. док-та</label><input type="text" id="id3" name="leaveRegisterNumber"><br>
-    <label for="id4">Дата исх. док-та</label><input type="date" id="id4" name="leaveDate"><br>
+<div>
+    <form action="/saveDocs" method="post" enctype="multipart/form-data" name="myForm"
+          onsubmit="return validateRegNum() && compareDate()">
+        <label for="id1">Рег. №</label>
+        <input type="text" id="id1" name="registerNumber" placeholder="Рег. №..." required>
 
-    <td>Форма доставки:</td>
-    <td>
+        <label for="id2">Дата рег.</label>
+        <input type="date" id="id2" name="registerDate" placeholder="Дата рег..." required><br>
+
+        <label for="id3">№ исх. док-та</label>
+        <input type="text" id="id3" name="leaveRegisterNumber" placeholder="№ исх. док-та...">
+
+        <label for="id4">Дата исх. док-та</label>
+        <input type="date" id="id4" name="leaveDate" placeholder="Дата исх. док-та..."><br>
+
+        Форма доставки:
+        <!--            <label>-->
+        <select name="formDelivery" id="formDelivery">
+            <option th:each="deliveryType : ${forms}"
+                    th:value="${deliveryType.id}"
+                    th:utext="${deliveryType.name}"
+            ></option>
+        </select>
+        <!--            </label>-->
+
+        Корреспондент:
+        <select name="correspondent" id="correspondent">
+            <option th:each="correspondentType : ${correspondents}"
+                    th:value="${correspondentType.id}"
+                    th:utext="${correspondentType.name}"
+            ></option>
+        </select>
+        <br>
+        <label for="topic">Тема</label>
+        <input type="text" name="topic" id="topic" maxlength="100" required placeholder="Тема..."><br>
+
+        <label for="textarea">Описание</label>
+        <textarea id="textarea" name="description" rows="4" cols="40" maxlength="1000"
+                  placeholder="Описание..."></textarea><br>
+        <label for="id5">Срок исполнения</label><input type="date" id="id5" name="executionPeriod"><br>
+        Доступ:
         <label>
-            <select name="formDelivery" id="formDelivery">
-                <option th:each="deliveryType : ${forms}"
-                        th:value="${deliveryType.id}"
-                        th:utext="${deliveryType.name}"
-                ></option>
-            </select>
-        </label>
-    </td>
-    <br>
+            Да
+            <input type="radio" name="access" value="1">
+            Нет
+            <input type="radio" name="access" value="0" checked></label><br>
 
-    <td>Корреспондент:</td>
-    <td>
+        Контроль:
         <label>
-            <select name="correspondent" id="correspondent">
-                <option th:each="correspondentType : ${correspondents}"
-                        th:value="${correspondentType.id}"
-                        th:utext="${correspondentType.name}"
-                ></option>
-            </select>
-        </label>
-    </td>
-    <br>
-    <label for="topic">Тема</label>
-    <input type="text" name="topic" id="topic" maxlength="100" required><br>
-    <label for="textarea">Описание</label>
-    <textarea id="textarea" name="description" rows="4" cols="40" maxlength="1000"></textarea><br>
-    <label for="id5">Срок исполнения</label><input type="date" id="id5" name="executionPeriod"><br>
-    Доступ:
-    Да
-    <label>
-        <input type="radio" name="access" value="1">
-    </label>
-    Нет
-    <label>
-        <input type="radio" name="access" value="0" checked>
-    </label><br>
+            Да
+            <input type="radio" name="control" value="1">
+            Нет
+            <input type="radio" name="control" value="0" checked></label><br>
 
-    Контроль:
-    Да
-    <label>
-        <input type="radio" name="control" value="1">
-    </label>
-    Нет
-    <label>
-        <input type="radio" name="control" value="0" checked>
-    </label><br>
+        <label for="file">Выбрать файл</label><input type="file" accept="application/pdf, application/msword"
+                                                     name="file"
+                                                     id="file" onchange="return validateSize(this)"><br><br>
 
-    <label for="file">Выбрать файл</label><input type="file" accept="application/pdf, application/msword" name="file"
-                                                id="file" onchange="return validateSize(this)"><br><br>
-    <button type="submit" onclick="return validateExtension()" value="save">Сохранить</button>
-    <button type="submit" value="exit">Закрыть</button>
-</form>
+        <input type="submit" onclick="return validateExtension()" value="Сохранить" id="sub1"/>
+        <input type="submit" value="Закрыть"/>
+    </form>
+</div>
 <script>
     function validateRegNum() {
         const x = document.forms["myForm"]["registerNumber"].value;
