@@ -22,9 +22,11 @@ label {
     width: 140px;
     text-align: right;
 }
+
 #control {
     color: chartreuse;
 }
+
 input[type = text] {
     width: 40%;
     padding: 10px 10px;
@@ -81,3 +83,5 @@ input[type=submit]:hover {
     border: 5px solid dodgerblue;
     border-radius: 4px;
 }
+
+/*----*/
