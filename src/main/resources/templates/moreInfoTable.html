@@ -6,62 +6,62 @@
     <link th:href="@{/styles/cssandjs/allData.css}" rel="stylesheet"/>
 </head>
 <body>
-<h2>File data </h2>
+<h2>О файле </h2>
 <table id="customers">
     <tr th:each="data : ${object}">
-        <th>ID</th>
+        <th>Идентификация</th>
         <td th:utext="${data.id}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>RegisterNumber</th>
+        <th>Рег. №</th>
         <td th:utext="${data.registerNumber}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>RegisterDate</th>
+        <th>Дата рег.</th>
         <td th:utext="${data.registerDate}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>OutgoingNumber</th>
+        <th>№ исх. док-та</th>
         <td th:utext="${data.outgoingNumber}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>OutgoingDate</th>
+        <th>Дата исх. док-та</th>
         <td th:utext="${data.outgoingDate}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>DeliveryType</th>
+        <th>Форма доставки</th>
         <td th:utext="${data.deliveryType}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>Correspondent</th>
+        <th>Корреспондент</th>
         <td th:utext="${data.correspondent}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>Theme</th>
+        <th>Тема</th>
         <td th:utext="${data.theme}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>Description</th>
+        <th>Описание</th>
         <td th:utext="${data.description}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>DueDate</th>
+        <th>Срок исполнения</th>
         <td th:utext="${data.dueDate}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>Access</th>
+        <th>Доступ</th>
         <td th:utext="${data.access}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>Control</th>
+        <th>Контроль</th>
         <td th:utext="${data.control}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>FileName</th>
+        <th>Имя файла</th>
         <td th:utext="${data.fileName}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>FilePathName</th>
+        <th>Относительный путь</th>
         <td th:utext="${data.filePathName}"></td>
     </tr>
 </table>

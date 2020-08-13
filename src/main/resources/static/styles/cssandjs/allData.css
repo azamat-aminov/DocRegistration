@@ -14,21 +14,17 @@
 }
 
 #customers tr:hover {
-    background-color: #dddddd;
+    background-color: #ddd;
 }
 
 #customers th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: deepskyblue;
+    background-color: #4CAF50;
     color: white;
 }
 
 h2 {
     text-align: center;
-}
-
-[data-href] {
-    cursor: pointer;
 }

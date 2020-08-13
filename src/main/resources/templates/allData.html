@@ -8,16 +8,16 @@
 <body>
 <div class="container">
     <div th:if="${not #lists.isEmpty(allData)}">
-            <h2>All data </h2>
+            <h2>Информация о данных </h2>
             <table id="customers">
                 <tr>
-                    <th>ID</th>
-                    <th>RegisterNumber</th>
-                    <th>RegisterDate</th>
-                    <th>Theme</th>
-                    <th>Description</th>
-                    <th>DueDate</th>
-                    <th>FileName</th>
+                    <th>Идентификация</th>
+                    <th>Рег. №</th>
+                    <th>Дата рег.</th>
+                    <th>Тема</th>
+                    <th>Описание</th>
+                    <th>Срок исполнения</th>
+                    <th>Имя файла</th>
                 </tr>
                 <tr th:each="data : ${allData}" th:onclick="|window.location='/data/by/' + ${data.id}">
                     <td th:utext="${data.id}"></td>

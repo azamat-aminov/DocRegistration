@@ -3,69 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/styles/cssandjs/style.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet"/>
+    <!--    <link rel="stylesheet" href="../static/styles/cssandjs/main.css"/>-->
 </head>
 <body>
-<h1>Регистрация входящего документа</h1>
-<div>
+<h2>Регистрация входящего документа</h2>
+<div class="container">
     <form action="/saveDocs" method="post" enctype="multipart/form-data" name="myForm"
           onsubmit="return validateRegNum() && compareDate()">
-        <label for="id1">Рег. №</label>
-        <input type="text" id="id1" name="registerNumber" placeholder="Рег. №..." required>
 
-        <label for="id2">Дата рег.</label>
-        <input type="date" id="id2" name="registerDate" placeholder="Дата рег..." required><br>
 
-        <label for="id3">№ исх. док-та</label>
-        <input type="text" id="id3" name="leaveRegisterNumber" placeholder="№ исх. док-та...">
+        <div class="row">
+            <div class="col-25">
+                <label for="id1">Рег. №</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="id1" name="registerNumber" placeholder="Рег. №..." required>
+            </div>
+        </div>
 
-        <label for="id4">Дата исх. док-та</label>
-        <input type="date" id="id4" name="leaveDate" placeholder="Дата исх. док-та..."><br>
+        <div class="row">
+            <div class="col-25">
+                <label for="id2">Дата рег.</label>
+            </div>
+            <div class="col-75">
+                <input type="date" id="id2" name="registerDate" placeholder="Дата рег..." required><br>
+            </div>
+        </div>
 
-        Форма доставки:
-        <select name="formDelivery" id="formDelivery">
-            <option th:each="deliveryType : ${forms}"
-                    th:value="${deliveryType.id}"
-                    th:utext="${deliveryType.name}"
-            ></option>
-        </select>
+        <div class="row">
+            <div class="col-25">
+                <label for="id3">№ исх. док-та</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="id3" name="leaveRegisterNumber" placeholder="№ исх. док-та...">
+            </div>
+        </div>
 
-        Корреспондент:
-        <select name="correspondent" id="correspondent">
-            <option th:each="correspondentType : ${correspondents}"
-                    th:value="${correspondentType.id}"
-                    th:utext="${correspondentType.name}"
-            ></option>
-        </select>
-        <br>
-        <label for="topic">Тема</label>
-        <input type="text" name="topic" id="topic" maxlength="100" required placeholder="Тема..."><br>
+        <div class="row">
+            <div class="col-25">
+                <label for="id4">Дата исх. док-та</label>
+            </div>
+            <div class="col-75">
+                <input type="date" id="id4" name="leaveDate" placeholder="Дата исх. док-та..."><br>
+            </div>
+        </div>
 
-        <label for="textarea">Описание</label>
-        <textarea id="textarea" name="description" rows="4" cols="40" maxlength="1000"
-                  placeholder="Описание..."></textarea><br>
-        <label for="id5">Срок исполнения</label><input type="date" id="id5" name="executionPeriod"><br>
+        <div class="row">
+            <div class="col-25">
+                <label for="formDelivery"> Форма доставки:</label>
+            </div>
+            <div class="col-75">
+                <select name="formDelivery" id="formDelivery">
+                    <option th:each="deliveryType : ${forms}"
+                            th:value="${deliveryType.id}"
+                            th:utext="${deliveryType.name}"
+                    ></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="correspondent">Корреспондент:</label>
+            </div>
+            <div class="col-75">
+                <select name="correspondent" id="correspondent">
+                    <option th:each="correspondentType : ${correspondents}"
+                            th:value="${correspondentType.id}"
+                            th:utext="${correspondentType.name}"
+                    ></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="topic">Тема</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="topic" id="topic" maxlength="100" required placeholder="Тема..."><br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="textarea">Описание</label>
+            </div>
+            <div class="col-75">
+ <textarea id="textarea" name="description" rows="2" cols="40" maxlength="1000"
+           placeholder="Описание..."></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="id5">Срок исполнения</label>
+            </div>
+            <div class="col-75">
+                <input type="date" id="id5" name="executionPeriod"><br>
+            </div>
+        </div>
 
         Доступ:
-        Да
-        <input type="radio" name="access" value="1">
-        Нет
-        <input type="radio" name="access" value="0" checked>
-        <br>
+        <label class="control-box">
+            <input type="radio" id="radio1" name="access" value="1">
+            <label for="radio1">Да</label>
+            <input type="radio" id="radio2" name="access" value="0" checked>
+            <label for="radio2">Нет</label>
+        </label><br>
 
         Контроль:
-        Да
-        <input type="radio" name="control" value="1">
-        Нет
-        <input type="radio" name="control" value="0" checked><br>
+        <label class="control-box-1">
+            <input type="radio" id="rad1" name="control" value="1">
+            <label for="rad1">Да</label>
+            <input type="radio" id="rad2" name="control" value="0" checked>
+            <label for="rad2">Нет</label>
+        </label>
 
-        <label for="file">Выбрать файл</label><input type="file" accept="application/pdf, application/msword"
-                                                     name="file"
-                                                     id="file"
-                                                     onchange="return validateSize(this) && validateExtension()"><br><br>
+        <div class="row">
+            <div class="col-25">
+                <label for="file" class="custom-file-upload"><i class="fa fa-cloud-upload"></i>Выбрать файл</label>
+            </div>
+            <div class="col-75">
+                <input type="file" accept="application/pdf, application/msword"
+                       name="file"
+                       id="file" style="display: none"
+                       onchange="return validateSize(this)">
+                <input id="uploadFile" placeholder="no file" disabled="disabled">
+            </div>
+        </div>
 
-        <input type="submit" onclick="return validateEmptyFields()" value="Сохранить" id="sub1"/>
-        <input type="submit" value="Закрыть"/>
+        <div class="row">
+            <input type="submit" onclick="return validateEmptyFields()" value="Сохранить" id="sub1"/>
+            <input type="submit" value="Закрыть"/>
+        </div>
+
     </form>
 </div>
 <script>
@@ -97,6 +170,7 @@
             file.value = "";
             return false;
         }
+        validateExtension();
     }
 
     function validateExtension() {
@@ -105,6 +179,7 @@
             return true;
         } else {
             alert("Неправильное расширение файла!")
+            fileName.value = "";
             return false;
         }
     }
@@ -114,10 +189,14 @@
         const regDate = document.getElementById("id2").value;
         const regTheme = document.getElementById("topic").value;
         if (regNum === "" || regDate === "" || regTheme === "") {
-            alert("Fill the empty fields")
+            alert("Заполните пустые поля")
             return false;
         }
     }
+
+    document.getElementById("file").onchange = function () {
+        document.getElementById("uploadFile").value = this.value;
+    };
 </script>
 </body>
 </html>

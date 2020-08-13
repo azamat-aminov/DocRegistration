@@ -1,10 +1,6 @@
 
-body {
-    background-image: url('image.jpg');
-}
-
 input[type=submit] {
-    background-color: dodgerblue;
+    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 16px 32px;
