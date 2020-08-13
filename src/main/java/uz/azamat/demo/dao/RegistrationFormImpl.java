@@ -22,6 +22,12 @@ public class RegistrationFormImpl implements RegistrationFormDao {
     }
 
     @Override
+    public IncomingDocuments getById(int id) {
+        String query = "SELECT * FROM incoming_docs WHERE ID = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, new RegistrationFormRowMapper());
+    }
+
+    @Override
     public void save(IncomingDocuments incomingDocuments) {
         String query = "INSERT INTO incoming_docs(REGISTER_NUM, REGISTER_DATE, OUTGOING_NUM, OUTGOING_DATE," +
                 "DELIVERY_TYPE, CORRESPONDENT, THEME, DESCRIPTION, DUE_DATE, ACCESS, CONTROL, FILE_NAME, FILE_REL_PATH) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";

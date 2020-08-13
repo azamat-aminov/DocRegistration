@@ -3,6 +3,7 @@ package uz.azamat.demo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import uz.azamat.demo.model.IncomingDocuments;
 import uz.azamat.demo.service.CorrespondentTypeService;
@@ -50,5 +51,12 @@ public class DocController {
     public String getAllDocs(Model model) {
         model.addAttribute("allData", registrationFormService.getAllData());
         return "allData";
+    }
+
+    @GetMapping("/data/by/{id}")
+    public String getOneDocById(Model model, @PathVariable int id) {
+        IncomingDocuments byId = registrationFormService.getById(id);
+        model.addAttribute("object", byId);
+        return "moreInfoTable";
     }
 }

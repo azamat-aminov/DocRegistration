@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/styles/cssandjs/allData.css}" rel="stylesheet"/>
+</head>
+<body>
+<h2>File data </h2>
+<table id="customers">
+    <tr th:each="data : ${object}">
+        <th>ID</th>
+        <td th:utext="${data.id}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>RegisterNumber</th>
+        <td th:utext="${data.registerNumber}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>RegisterDate</th>
+        <td th:utext="${data.registerDate}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>OutgoingNumber</th>
+        <td th:utext="${data.outgoingNumber}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>OutgoingDate</th>
+        <td th:utext="${data.outgoingDate}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>DeliveryType</th>
+        <td th:utext="${data.deliveryType}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>Correspondent</th>
+        <td th:utext="${data.correspondent}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>Theme</th>
+        <td th:utext="${data.theme}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>Description</th>
+        <td th:utext="${data.description}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>DueDate</th>
+        <td th:utext="${data.dueDate}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>Access</th>
+        <td th:utext="${data.access}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>Control</th>
+        <td th:utext="${data.control}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>FileName</th>
+        <td th:utext="${data.fileName}"></td>
+    </tr>
+    <tr th:each="data : ${object}">
+        <th>FilePathName</th>
+        <td th:utext="${data.filePathName}"></td>
+    </tr>
+</table>
+</body>
+</html>

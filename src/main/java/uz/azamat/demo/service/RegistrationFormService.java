@@ -20,6 +20,10 @@ public class RegistrationFormService {
     RegistrationFormDao registrationFormDao;
 
 
+    public IncomingDocuments getById(int id) {
+        return registrationFormDao.getById(id);
+    }
+
     public List<IncomingDocuments> getAllData() {
         return registrationFormDao.getAllData();
     }
