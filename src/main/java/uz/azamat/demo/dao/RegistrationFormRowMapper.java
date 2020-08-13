@@ -2,7 +2,6 @@ package uz.azamat.demo.dao;
 
 import org.springframework.jdbc.core.RowMapper;
 import uz.azamat.demo.model.IncomingDocuments;
-import uz.azamat.demo.model.RegistrationForm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

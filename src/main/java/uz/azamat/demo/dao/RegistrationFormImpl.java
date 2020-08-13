@@ -3,7 +3,6 @@ package uz.azamat.demo.dao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import uz.azamat.demo.model.IncomingDocuments;
-import uz.azamat.demo.model.RegistrationForm;
 
 import java.util.List;
 

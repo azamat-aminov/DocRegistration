@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<!--    <link rel="stylesheet" href="style.css" media="screen" type="text/css">-->
-        <link th:href="@{/styles/cssandjs/style.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/cssandjs/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <h1>Регистрация входящего документа</h1>
@@ -24,14 +23,12 @@
         <input type="date" id="id4" name="leaveDate" placeholder="Дата исх. док-та..."><br>
 
         Форма доставки:
-        <!--            <label>-->
         <select name="formDelivery" id="formDelivery">
             <option th:each="deliveryType : ${forms}"
                     th:value="${deliveryType.id}"
                     th:utext="${deliveryType.name}"
             ></option>
         </select>
-        <!--            </label>-->
 
         Корреспондент:
         <select name="correspondent" id="correspondent">
@@ -48,25 +45,26 @@
         <textarea id="textarea" name="description" rows="4" cols="40" maxlength="1000"
                   placeholder="Описание..."></textarea><br>
         <label for="id5">Срок исполнения</label><input type="date" id="id5" name="executionPeriod"><br>
+
         Доступ:
-        <label>
-            Да
-            <input type="radio" name="access" value="1">
-            Нет
-            <input type="radio" name="access" value="0" checked></label><br>
+        Да
+        <input type="radio" name="access" value="1">
+        Нет
+        <input type="radio" name="access" value="0" checked>
+        <br>
 
         Контроль:
-        <label>
-            Да
-            <input type="radio" name="control" value="1">
-            Нет
-            <input type="radio" name="control" value="0" checked></label><br>
+        Да
+        <input type="radio" name="control" value="1">
+        Нет
+        <input type="radio" name="control" value="0" checked><br>
 
         <label for="file">Выбрать файл</label><input type="file" accept="application/pdf, application/msword"
                                                      name="file"
-                                                     id="file" onchange="return validateSize(this)"><br><br>
+                                                     id="file"
+                                                     onchange="return validateSize(this) && validateExtension()"><br><br>
 
-        <input type="submit" onclick="return validateExtension()" value="Сохранить" id="sub1"/>
+        <input type="submit" onclick="return validateEmptyFields()" value="Сохранить" id="sub1"/>
         <input type="submit" value="Закрыть"/>
     </form>
 </div>
@@ -107,6 +105,16 @@
             return true;
         } else {
             alert("Неправильное расширение файла!")
+            return false;
+        }
+    }
+
+    function validateEmptyFields() {
+        const regNum = document.getElementById("id1").value;
+        const regDate = document.getElementById("id2").value;
+        const regTheme = document.getElementById("topic").value;
+        if (regNum === "" || regDate === "" || regTheme === "") {
+            alert("Fill the empty fields")
             return false;
         }
     }
