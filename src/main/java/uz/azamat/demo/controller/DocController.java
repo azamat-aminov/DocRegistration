@@ -44,9 +44,10 @@ public class DocController {
     }
 
     @PostMapping("/saveDocs")
-    public String someMethod(RegistrationForm registrationForm) throws IOException {
+    public String someMethod(RegistrationForm registrationForm, Model model) throws IOException {
         registrationFormService.saveAllData(registrationForm);
-        return "main";
+        model.addAttribute("allData", registrationFormService.getAllData());
+        return "table";
     }
 
     @GetMapping("/getAllDocs")
