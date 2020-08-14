@@ -13,7 +13,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class RegistrationFormService {

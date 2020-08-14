@@ -136,7 +136,9 @@
 
         <div class="row">
             <input type="submit" value="Сохранить" id="sub1"/>
-            <form action="/getAllDocs" method="post" enctype="multipart/form-data" name="form2"><input type="submit" value="Закрыть"/></form>
+            <form action="/getAllDocs" method="post" enctype="multipart/form-data" name="form2"><input type="submit"
+                                                                                                       value="Закрыть"/>
+            </form>
         </div>
 
     </form>
@@ -145,7 +147,8 @@
     function validateRegNum() {
         const x = document.forms["myForm"]["registerNumber"].value;
         const regExp = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
-        let isValid = !!x.match(regExp);
+        let isValid = false;
+        isValid = !!(x.match(regExp) || x.match(/[\wа-я]+/ig));
 
         if (!isValid) {
             alert("Регистрационный номер не может состоять только из букв или специальных символов!")
@@ -184,15 +187,6 @@
         }
     }
 
-    function validateEmptyFields() {
-        const regNum = document.getElementById("id1").value;
-        const regDate = document.getElementById("id2").value;
-        const regTheme = document.getElementById("topic").value;
-        if (regNum === "" || regDate === "" || regTheme === "") {
-            alert("Заполните пустые поля")
-            return false;
-        }
-    }
 
     document.getElementById("file").onchange = function () {
         document.getElementById("uploadFile").value = this.value;
