@@ -45,8 +45,10 @@ public class RegistrationFormService {
         doc.setOutgoingNumber(leaveRegisterNumber);
 
         String leaveDate = registrationForm.getLeaveDate();
-        Date date2 = Date.valueOf(leaveDate);
-        doc.setOutgoingDate(date2);
+        if (!leaveDate.isEmpty()) {
+            Date date2 = Date.valueOf(leaveDate);
+            doc.setOutgoingDate(date2);
+        }
 
         String formDelivery = registrationForm.getFormDelivery();
         doc.setDeliveryType(Integer.parseInt(formDelivery));
@@ -61,8 +63,10 @@ public class RegistrationFormService {
         doc.setDescription(description);
 
         String executionPeriod = registrationForm.getExecutionPeriod();
-        Date date3 = Date.valueOf(executionPeriod);
-        doc.setDueDate(date3);
+        if (!executionPeriod.isEmpty()) {
+            Date date3 = Date.valueOf(executionPeriod);
+            doc.setDueDate(date3);
+        }
 
         int access = registrationForm.getAccess();
         doc.setAccess(access);
