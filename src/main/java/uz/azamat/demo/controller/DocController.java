@@ -50,7 +50,7 @@ public class DocController {
     @GetMapping("/getAllDocs")
     public String getAllDocs(Model model) {
         model.addAttribute("allData", registrationFormService.getAllData());
-        return "allData";
+        return "table";
     }
 
     @GetMapping("/data/by/{id}")

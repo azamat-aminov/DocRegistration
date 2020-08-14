@@ -9,10 +9,6 @@
 <h2>О файле </h2>
 <table id="customers">
     <tr th:each="data : ${object}">
-        <th>Идентификация</th>
-        <td th:utext="${data.id}"></td>
-    </tr>
-    <tr th:each="data : ${object}">
         <th>Рег. №</th>
         <td th:utext="${data.registerNumber}"></td>
     </tr>
@@ -57,12 +53,8 @@
         <td th:utext="${data.control}"></td>
     </tr>
     <tr th:each="data : ${object}">
-        <th>Имя файла</th>
+        <th>Файл</th>
         <td th:utext="${data.fileName}"></td>
-    </tr>
-    <tr th:each="data : ${object}">
-        <th>Относительный путь</th>
-        <td th:utext="${data.filePathName}"></td>
     </tr>
 </table>
 </body>

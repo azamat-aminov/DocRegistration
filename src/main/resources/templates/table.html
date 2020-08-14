@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/styles/cssandjs/allData.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/cssandjs/table.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
@@ -11,7 +11,6 @@
             <h2>Информация о данных </h2>
             <table id="customers">
                 <tr>
-                    <th>Идентификация</th>
                     <th>Рег. №</th>
                     <th>Дата рег.</th>
                     <th>Тема</th>
@@ -20,7 +19,6 @@
                     <th>Имя файла</th>
                 </tr>
                 <tr th:each="data : ${allData}" th:onclick="|window.location='/data/by/' + ${data.id}">
-                    <td th:utext="${data.id}"></td>
                     <td th:utext="${data.registerNumber}"></td>
                     <td th:utext="${data.registerDate}"></td>
                     <td th:utext="${data.theme}"></td>
