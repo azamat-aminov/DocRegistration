@@ -64,7 +64,7 @@ public class DocController {
     }
 
     @GetMapping("/getFile/{id}")
-    public String getFile(@PathVariable int id, HttpServletResponse response) throws IOException {
+    public void getFile(@PathVariable int id, HttpServletResponse response) throws IOException {
         IncomingDocuments docs = registrationFormService.getById(id);
         File fileToSend = new File("/home/azamat/docs/" + docs.getFilePathName());
 
@@ -72,7 +72,5 @@ public class DocController {
         InputStream in = new FileInputStream(fileToSend);
         IOUtils.copy(in, response.getOutputStream());
         response.flushBuffer();
-
-        return "moreInfoTable";
     }
 }
