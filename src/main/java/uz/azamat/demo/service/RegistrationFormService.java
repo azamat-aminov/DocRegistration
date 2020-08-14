@@ -77,8 +77,7 @@ public class RegistrationFormService {
         Files.write(path, bytes);
         doc.setFileName(file.getOriginalFilename());
 
-        String relPath = "docs/" + fileName;
-        doc.setFilePathName(relPath);
+        doc.setFilePathName(fileName);
 
         registrationFormDao.save(doc);
     }

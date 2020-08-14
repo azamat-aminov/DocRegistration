@@ -1,5 +1,6 @@
 package uz.azamat.demo.controller;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,8 @@ import uz.azamat.demo.model.DeliveryType;
 import uz.azamat.demo.model.RegistrationForm;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.List;
 
 @Controller
@@ -61,9 +62,16 @@ public class DocController {
         return "moreInfoTable";
     }
 
-    @GetMapping("/getFile")
-    public String getFile() {
+    @GetMapping("/getFile/{id}")
+    public String getFile(@PathVariable int id, HttpServletResponse response) throws IOException {
+        IncomingDocuments docs = registrationFormService.getById(id);
+        File fileToSend = new File("/home/azamat/docs/" + docs.getFilePathName());
 
-        return "";
+        response.setHeader("Content-Disposition", "attachment; filename=" + docs.getFileName());
+        InputStream in = new FileInputStream(fileToSend);
+        IOUtils.copy(in, response.getOutputStream());
+        response.flushBuffer();
+
+        return "moreInfoTable";
     }
 }

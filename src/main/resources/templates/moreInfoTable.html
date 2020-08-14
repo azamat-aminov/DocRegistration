@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/styles/cssandjs/allData.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/cssandjs/table.css}" rel="stylesheet"/>
 </head>
 <body>
 <h2>О файле </h2>
@@ -54,7 +54,7 @@
     </tr>
     <tr th:each="data : ${object}">
         <th>Файл</th>
-        <td th:utext="${data.fileName}"></td>
+        <td th:utext="${data.fileName}" th:onclick="|window.location='/getFile/' + ${data.id}"></td>
     </tr>
 </table>
 </body>
