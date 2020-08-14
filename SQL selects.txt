@@ -48,14 +48,16 @@ ADD CONSTRAINT FK_REF_DATA2
 FOREIGN KEY (CORRESPONDENT) REFERENCES ref_data(ID);
 
 Предоставить список документов, поступивших от ЦБ (центрального банка) по электронной почте за текущий месяц.
-SELECT * FROM incoming_docs WHERE (REGISTER_DATE BETWEEN '2020-08-01' AND '2020-08-31') AND CORRESPONDENT =4 AND DELIVERY_TYPE =2;
+SELECT * FROM incoming_docs WHERE (REGISTER_DATE BETWEEN '2020-08-01' AND '2020-08-31') AND CORRESPONDENT =
+(SELECT ID FROM ref_data  WHERE NAME ='ЦБ') AND DELIVERY_TYPE =(SELECT ID FROM ref_data  WHERE NAME ='Email');
 
 Предоставить список документов за 1 квартал текущего года, кроме поступивших из ГНИ с доставкой курьером.
-SELECT * FROM incoming_docs WHERE (REGISTER_DATE BETWEEN '2020-01-01' AND '2020-03-31') AND NOT (CORRESPONDENT = 5 AND DELIVERY_TYPE =1);
+SELECT * FROM incoming_docs WHERE (REGISTER_DATE BETWEEN '2020-01-01' AND '2020-03-31')
+AND NOT (CORRESPONDENT = (SELECT ID FROM ref_data  WHERE NAME ='ГНИ') AND DELIVERY_TYPE =(SELECT ID FROM ref_data  WHERE NAME ='Курьер'));
 
 Предоставить список документов за предыдущий месяц, поступивших от ТСЖ, исключая документы о предоставления кредита (в теме писем от корреспондентов будет встречаться слово кредит).
-SELECT * FROM incoming_docs WHERE (REGISTER_DATE BETWEEN '2020-07-01' AND '2020-07-31') AND CORRESPONDENT = 6 AND THEME NOT LIKE '%кредит%';
-
+SELECT * FROM incoming_docs WHERE (REGISTER_DATE BETWEEN '2020-07-01' AND '2020-07-31')
+AND CORRESPONDENT = (SELECT ID FROM ref_data  WHERE NAME ='ТСЖ') AND THEME NOT LIKE '%кредит%';
 
 
 
