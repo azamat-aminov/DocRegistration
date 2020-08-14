@@ -14,6 +14,7 @@ import uz.azamat.demo.model.DeliveryType;
 import uz.azamat.demo.model.RegistrationForm;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -58,5 +59,11 @@ public class DocController {
         IncomingDocuments byId = registrationFormService.getById(id);
         model.addAttribute("object", byId);
         return "moreInfoTable";
+    }
+
+    @GetMapping("/getFile")
+    public String getFile() {
+
+        return "";
     }
 }

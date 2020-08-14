@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RegistrationFormService {
@@ -71,12 +72,12 @@ public class RegistrationFormService {
 
         MultipartFile file = registrationForm.getFile();
         byte[] bytes = file.getBytes();
-        Path path = Paths.get("/home/azamat/docs/" + file.getOriginalFilename());
+        String fileName = System.currentTimeMillis() + file.getOriginalFilename();
+        Path path = Paths.get("/home/azamat/docs/" + fileName);
         Files.write(path, bytes);
-        String fileName = file.getOriginalFilename();
-        doc.setFileName(fileName);
+        doc.setFileName(file.getOriginalFilename());
 
-        String relPath = "docs/" + file;
+        String relPath = "docs/" + fileName;
         doc.setFilePathName(relPath);
 
         registrationFormDao.save(doc);
