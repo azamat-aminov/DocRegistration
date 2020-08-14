@@ -7,6 +7,46 @@
 </head>
 <body>
 <form action="/main" method="get">
+    <h1>Используемые технологии</h1>
+    <ul class="list">
+        <li>Java</li>
+        <li>Spring boot</li>
+        <li>Thymeleaf</li>
+        <li>MySql</li>
+        <li>Javascript</li>
+        <li>HTML</li>
+    </ul>
+
+    <div class="select-sql"><p><strong>Предоставить список документов, поступивших от ЦБ (центрального банка) по
+        электронной почте за текущий
+        месяц.</strong></p>
+        <p>
+            <span style="color: #820b03">SELECT * FROM</span> incoming_docs <span style="color: #820b03">WHERE</span>
+            (REGISTER_DATE <span style="color: #820b03">BETWEEN</span><span style="color: #fc53b6">'2020-08-01'</span>
+            <span style="color: #820b03">AND</span> <span style="color: #fc53b6">'2020-08-31'</span>) <span
+                style="color: #820b03">AND</span> CORRESPONDENT =<span style="color: #fc53b6">4</span>
+            <span style="color: #820b03">AND</span> DELIVERY_TYPE =<span style="color: #fc53b6">2</span>;
+        </p>
+        <p><strong>Предоставить список документов за 1 квартал текущего года, кроме поступивших из ГНИ с доставкой
+            курьером.</strong></p>
+        <p>
+            <span style="color: #820b03">SELECT * FROM</span> incoming_docs <span style="color: #820b03">WHERE</span>
+            (REGISTER_DATE <span style="color: #820b03">BETWEEN</span> <span style="color: #fc53b6">'2020-01-01'</span>
+            <span style="color: #820b03">AND</span> <span style="color: #fc53b6">'2020-03-31'</span>) <span
+                style="color: #820b03">AND</span> <span
+                style="color: #820b03">NOT</span> (CORRESPONDENT =<span style="color: #fc53b6">5</span>
+            <span style="color: #820b03">AND</span> DELIVERY_TYPE =<span style="color: #fc53b6">1</span>);
+        </p>
+
+        <p><strong>Предоставить список документов за предыдущий месяц, поступивших от ТСЖ, исключая документы о
+            предоставления кредита (в теме писем от корреспондентов будет встречаться слово кредит).</strong></p>
+        <p><span style="color: #820b03">SELECT * FROM</span> incoming_docs <span style="color: #820b03">WHERE</span>
+            (REGISTER_DATE <span style="color: #820b03">BETWEEN</span><span style="color: #fc53b6">'2020-07-01'</span>
+            <span style="color: #820b03">AND</span> <span style="color: #fc53b6">'2020-07-31'</span>) <span
+                    style="color: #820b03">AND</span> CORRESPONDENT =<span style="color: #fc53b6">6</span>
+            <span style="color: #820b03">AND</span> THEME <span style="color: #820b03">NOT LIKE</span> <span style="color: #fc53b6">'%кредит%';</span>
+
+        </p></div>
     <input type="submit" name="submit" value="Создать форму">
 </form>
 </body>

@@ -14,3 +14,13 @@ input[type=submit] {
     position: absolute;
     top: 40%;
 }
+.select-sql {
+    background-color: #ecebeb;
+    margin-top: 130px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.list li {
+    padding: 2px;
+
+}
