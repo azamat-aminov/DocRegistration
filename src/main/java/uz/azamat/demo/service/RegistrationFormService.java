@@ -1,6 +1,7 @@
 package uz.azamat.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import uz.azamat.demo.dao.RegistrationFormDao;
@@ -17,7 +18,10 @@ import java.util.List;
 @Service
 public class RegistrationFormService {
     @Autowired
-    RegistrationFormDao registrationFormDao;
+    private RegistrationFormDao registrationFormDao;
+
+    @Value("${files.folder}")
+    private String filesFolderPath;
 
 
     public IncomingDocuments getById(int id) {
@@ -76,7 +80,7 @@ public class RegistrationFormService {
         MultipartFile file = registrationForm.getFile();
         byte[] bytes = file.getBytes();
         String fileName = System.currentTimeMillis() + file.getOriginalFilename();
-        Path path = Paths.get("/home/azamat/docs/" + fileName);
+        Path path = Paths.get(filesFolderPath + fileName);
         Files.write(path, bytes);
         doc.setFileName(file.getOriginalFilename());
 
