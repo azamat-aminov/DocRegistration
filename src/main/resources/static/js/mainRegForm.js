@@ -1,13 +1,12 @@
 function validateRegNum() {
     const x = document.forms["myForm"]["registerNumber"].value;
-    const regExp = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
-    let isValid = false;
-    isValid = !!(x.match(regExp) || x.match(/[\wа-я]+/ig));
+    let hasDigit = false;
+    hasDigit = new RegExp("\\d").test(x);
     console.log("ValidateRegNum works too");
-    if (!isValid) {
+    if (!hasDigit) {
         alert("Регистрационный номер не может состоять только из букв или специальных символов!")
     }
-    return isValid;
+    return hasDigit;
 }
 
 function compareDate() {
