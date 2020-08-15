@@ -11,13 +11,17 @@ function validateRegNum() {
 }
 
 function compareDate() {
-    let dateRegistration = document.getElementById("registerDate").value;
     let periodOfExecution = document.getElementById("executionPeriod").value;
-    let isValidDeadLine = new Date(periodOfExecution) > new Date(dateRegistration);
-    if (!isValidDeadLine) {
-        alert("Срок исполнения не может быть раньше даты регистрации документа!")
+    if (periodOfExecution) {
+        let dateRegistration = document.getElementById("registerDate").value;
+        let isValidDeadLine = new Date(periodOfExecution) > new Date(dateRegistration);
+        if (!isValidDeadLine) {
+            alert("Срок исполнения не может быть раньше даты регистрации документа!")
+        }
+        return isValidDeadLine;
+    } else {
+        return true;
     }
-    return isValidDeadLine;
 }
 
 function validateSize(file) {
@@ -42,8 +46,8 @@ function validateExtension() {
 }
 
 function validateAll() {
-    let isValidRegistrationNumber =   validateRegNum();
-    let isValidDeadLine =  compareDate();
+    let isValidRegistrationNumber = validateRegNum();
+    let isValidDeadLine = compareDate();
 
     return isValidDeadLine && isValidRegistrationNumber;
 }
