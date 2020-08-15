@@ -41,11 +41,21 @@ FOREIGN KEY (DELIVERY_TYPE) REFERENCES ref_data(ID);
 
 ALTER TABLE ref_data CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-SELECT ID , NAME FROM ref_data WHERE REF_TYPE_ID = (SELECT ID FROM ref_types WHERE NAME ='Delivery_type');
-
 ALTER TABLE incoming_docs  
 ADD CONSTRAINT FK_REF_DATA2
 FOREIGN KEY (CORRESPONDENT) REFERENCES ref_data(ID);
+
+INSERT INTO ref_types(NAME)
+VALUES ('correspondent_type'), ('delivery_type');
+
+INSERT INTO ref_data(NAME, REF_TYPE_ID)
+VALUES
+('Курьер', (SELECT ID FROM ref_types WHERE NAME='delivery_type')),
+('Email', (SELECT ID FROM ref_types WHERE NAME='delivery_type')),
+('Телефонограмма', (SELECT ID FROM ref_types WHERE NAME='delivery_type')),
+('ЦБ', (SELECT ID FROM ref_types WHERE NAME='correspondent_type')),
+('ГНИ', (SELECT ID FROM ref_types WHERE NAME='correspondent_type')),
+('ТСЖ', (SELECT ID FROM ref_types WHERE NAME='correspondent_type'));
 
 Предоставить список документов, поступивших от ЦБ (центрального банка) по электронной почте за текущий месяц.
 SELECT * FROM incoming_docs WHERE (REGISTER_DATE BETWEEN '2020-08-01' AND '2020-08-31') AND CORRESPONDENT =
