@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
-    <!--    <link rel="stylesheet" href="../static/styles/cssandjs/main.css"/>-->
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/mainRegForm.js}"></script>
 </head>
 <body>
 <h2>Регистрация входящего документа</h2>
 <div class="container">
     <form action="/saveDocs" method="post" enctype="multipart/form-data" name="myForm"
-          onsubmit="return validateRegNum() && compareDate()">
+          onsubmit="return validateAll()">
 
 
         <div class="row">
@@ -24,10 +24,10 @@
 
         <div class="row">
             <div class="col-25">
-                <label for="id2">Дата рег.</label>
+                <label for="registerDate">Дата рег.</label>
             </div>
             <div class="col-75">
-                <input type="date" id="id2" name="registerDate" placeholder="Дата рег..." required><br>
+                <input type="date" id="registerDate" name="registerDate" placeholder="Дата рег..." required><br>
             </div>
         </div>
 
@@ -42,10 +42,10 @@
 
         <div class="row">
             <div class="col-25">
-                <label for="id4">Дата исх. док-та</label>
+                <label for="leaveDate">Дата исх. док-та</label>
             </div>
             <div class="col-75">
-                <input type="date" id="id4" name="leaveDate" placeholder="Дата исх. док-та..."><br>
+                <input type="date" id="leaveDate" name="leaveDate" placeholder="Дата исх. док-та..."><br>
             </div>
         </div>
 
@@ -98,10 +98,10 @@
 
         <div class="row">
             <div class="col-25">
-                <label for="id5">Срок исполнения</label>
+                <label for="executionPeriod">Срок исполнения</label>
             </div>
             <div class="col-75">
-                <input type="date" id="id5" name="executionPeriod"><br>
+                <input type="date" id="executionPeriod" name="executionPeriod"><br>
             </div>
         </div>
 
@@ -152,49 +152,8 @@
     </form>
 </div>
 <script>
-    function validateRegNum() {
-        const x = document.forms["myForm"]["registerNumber"].value;
-        const regExp = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
-        let isValid = false;
-        isValid = !!(x.match(regExp) || x.match(/[\wа-я]+/ig));
-
-        if (!isValid) {
-            alert("Регистрационный номер не может состоять только из букв или специальных символов!")
-        }
-        return isValid;
-    }
-
-    function compareDate() {
-        const dateRegistration = document.getElementById("id2").value;
-        const periodOfExecution = document.getElementById("id5").value;
-        let b = new Date(periodOfExecution) > new Date(dateRegistration);
-        if (!b) {
-            alert("Срок исполнения не может быть раньше даты регистрации документа!")
-        }
-        return b;
-    }
-
-    function validateSize(file) {
-        const fileSize = file.files[0].size / 1024 / 1024; // in MB
-        if (fileSize > 1) {
-            alert("Размер файла превышает 1 МБ. Пожалуйста, выберите файл размером менее 1 МБ!");
-            file.value = "";
-            return false;
-        }
-        // validateExtension();
-    }
-
-    function validateExtension() {
-        const fileName = document.getElementById("file");
-        if (fileName.value.endsWith(".doc") || fileName.value.endsWith(".pdf") || fileName.value.endsWith(".docx")) {
-            return true;
-        } else {
-            alert("Неправильное расширение файла!")
-            fileName.value = "";
-            return false;
-        }
-    }
-
+    document.getElementById('registerDate').valueAsDate = new Date();
+    document.getElementById('leaveDate').valueAsDate = new Date();
     document.getElementById("file").onchange = function () {
         document.getElementById("uploadFile").value = this.value;
     };
