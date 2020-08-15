@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
     <!--    <link rel="stylesheet" href="../static/styles/cssandjs/main.css"/>-->
 </head>
 <body>
@@ -17,7 +17,7 @@
             <div class="col-25">
                 <label for="id1">Рег. №</label>
             </div>
-            <div class="col-75">
+            <div class="col-50">
                 <input type="text" id="id1" name="registerNumber" placeholder="Рег. №..." required>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="col-25">
                 <label for="id3">№ исх. док-та</label>
             </div>
-            <div class="col-75">
+            <div class="col-50">
                 <input type="text" id="id3" name="leaveRegisterNumber" placeholder="№ исх. док-та...">
             </div>
         </div>
@@ -53,7 +53,7 @@
             <div class="col-25">
                 <label for="formDelivery"> Форма доставки:</label>
             </div>
-            <div class="col-75">
+            <div class="col-25">
                 <select name="formDelivery" id="formDelivery">
                     <option th:each="deliveryType : ${forms}"
                             th:value="${deliveryType.id}"
@@ -67,7 +67,7 @@
             <div class="col-25">
                 <label for="correspondent">Корреспондент:</label>
             </div>
-            <div class="col-75">
+            <div class="col-25">
                 <select name="correspondent" id="correspondent">
                     <option th:each="correspondentType : ${correspondents}"
                             th:value="${correspondentType.id}"
@@ -105,21 +105,29 @@
             </div>
         </div>
 
-        Доступ:
-        <label class="control-box">
-            <input type="radio" id="radio1" name="access" value="1">
-            <label for="radio1">Да</label>
-            <input type="radio" id="radio2" name="access" value="0" checked>
-            <label for="radio2">Нет</label>
-        </label><br>
+        <div class="row">
+            <div class="col-25">
+                Доступ:
+            </div>
+            <div class="col-75">
+                <input type="radio" id="radio1" name="access" value="1">
+                <label for="radio1">Да</label>
+                <input type="radio" id="radio2" name="access" value="0" checked>
+                <label for="radio2">Нет</label>
+            </div>
+        </div>
 
-        Контроль:
-        <label class="control-box-1">
-            <input type="radio" id="rad1" name="control" value="1">
-            <label for="rad1">Да</label>
-            <input type="radio" id="rad2" name="control" value="0" checked>
-            <label for="rad2">Нет</label>
-        </label>
+        <div class="row">
+            <div class="col-25">
+                Контроль:
+            </div>
+            <div class="col-75">
+                <input type="radio" id="rad1" name="control" value="1">
+                <label for="rad1">Да</label>
+                <input type="radio" id="rad2" name="control" value="0" checked>
+                <label for="rad2">Нет</label>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-25">
@@ -135,9 +143,9 @@
         </div>
 
         <div class="row">
-            <input type="submit" value="Сохранить" id="sub1"/>
+            <input type="submit" value="Сохранить" id="sub1" />
             <form action="/getAllDocs" method="post" enctype="multipart/form-data" name="form2"><input type="submit"
-                                                                                                       value="Закрыть"/>
+                                                                                                       value="Закрыть" />
             </form>
         </div>
 
@@ -186,7 +194,6 @@
             return false;
         }
     }
-
 
     document.getElementById("file").onchange = function () {
         document.getElementById("uploadFile").value = this.value;
