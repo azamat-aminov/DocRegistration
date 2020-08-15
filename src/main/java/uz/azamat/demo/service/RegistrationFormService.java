@@ -17,12 +17,12 @@ import java.util.List;
 
 @Service
 public class RegistrationFormService {
+
     @Autowired
     private RegistrationFormDao registrationFormDao;
 
     @Value("${files.folder}")
     private String filesFolderPath;
-
 
     public IncomingDocuments getById(int id) {
         return registrationFormDao.getById(id);
@@ -45,7 +45,9 @@ public class RegistrationFormService {
         doc.setRegisterDate(date);
 
         String leaveRegisterNumber = registrationForm.getLeaveRegisterNumber();
-        doc.setOutgoingNumber(leaveRegisterNumber);
+        if (leaveRegisterNumber != null && !leaveRegisterNumber.isEmpty()) {
+            doc.setOutgoingNumber(leaveRegisterNumber);
+        }
 
         String leaveDate = registrationForm.getLeaveDate();
         if (!leaveDate.isEmpty()) {
