@@ -33,7 +33,24 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background-color: #45a049;
+    background-color: black;
+}
+
+.closeBtn {
+    width: 25%;
+    background-color: red;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 278px;
+    margin-top: 3px;
+    display: inline-block;
+}
+
+.closeBtn:hover {
+    background-color: black;
 }
 
 .container {
