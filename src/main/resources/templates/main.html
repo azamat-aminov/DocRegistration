@@ -129,7 +129,7 @@
                 <input type="file" accept="application/pdf, application/msword"
                        name="file"
                        id="file" style="display: none"
-                       onchange="return validateSize(this)">
+                       onchange="return validateSize(this) & validateExtension()">
                 <input id="uploadFile" placeholder="no file" disabled="disabled">
             </div>
         </div>
@@ -173,7 +173,7 @@
             file.value = "";
             return false;
         }
-        validateExtension();
+        // validateExtension();
     }
 
     function validateExtension() {
