@@ -57,13 +57,13 @@ public class RegistrationFormImpl implements RegistrationFormDao {
                 "(select name from ref_data rd  where rd.ID = ind.DELIVERY_TYPE) as DELIVERY_TYPE_NAME,\n" +
                 "(select name from ref_data rd  where rd.ID = ind.CORRESPONDENT) as CORRESPONDENT_NAME\n" +
                 "FROM incoming_docs ind WHERE ind.ID = ?";
-        return jdbcTemplate.queryForObject(query, new Object[]{id}, new RegistrationFormDetailedRowMapper());
+        return jdbcTemplate.query(query, new Object[]{id}, new RegistrationFormDetailedRsExtractor());
     }
 
     @Override
     public IncomingDocuments getByRegNum(final String registerNumber) {
         String query = "SELECT * FROM incoming_docs where REGISTER_NUM=?";
-        return jdbcTemplate.queryForObject(query, new Object[]{registerNumber}, new RegistrationFormRowMapper());
+        return jdbcTemplate.query(query, new Object[] {registerNumber}, new RegistrationFormDetailedRsExtractor());
     }
 
     @Override
