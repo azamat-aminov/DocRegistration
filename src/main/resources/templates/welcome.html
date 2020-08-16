@@ -16,9 +16,12 @@
     <li>HTML</li>
 </ul>
 
-<div class="select-sql"><p><strong>Предоставить список документов, поступивших от ЦБ (центрального банка) по
-    электронной почте за текущий
-    месяц.</strong></p>
+<button onclick="location.href='/main'" class="regNewDocBtn">Добавить новый документ</button>
+
+<div class="select-sql">
+    <p><strong>Предоставить список документов, поступивших от ЦБ (центрального банка) по
+        электронной почте за текущий
+        месяц.</strong></p>
     <p><code>
         SELECT * FROM incoming_docs
         WHERE (MONTH(REGISTER_DATE) = MONTH(CURDATE()) AND YEAR(REGISTER_DATE) = YEAR(CURDATE()))
@@ -28,7 +31,7 @@
         NAME='delivery_type'));
     </code>
     </p>
-    <button onclick="location.href='/getAllFromCentralBankViaEmailForCurrentMonth'" class="regNewDocBtn">Посмотреть</button>
+    <button onclick="location.href='/getAllFromCentralBankViaEmailForCurrentMonth'" class="seeListBtn">Посмотреть</button>
     <br>
     <p><strong>Предоставить список документов за 1 квартал текущего года, кроме поступивших из ГНИ с доставкой
         курьером.</strong></p>
@@ -42,7 +45,7 @@
             NAME='delivery_type')));
         </code>
     </p>
-    <button onclick="location.href='/getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier'" class="regNewDocBtn">Посмотреть</button>
+    <button onclick="location.href='/getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier'" class="seeListBtn">Посмотреть</button>
     <br>
 
     <p><strong>Предоставить список документов за предыдущий месяц, поступивших от ТСЖ, исключая документы о
@@ -58,11 +61,9 @@
             AND LOWER(THEME) NOT LIKE '%credit%';
         </code>
     </p>
-    <button onclick="location.href='/getAllFromTsjInCurrentMonthExceptCredits'" class="regNewDocBtn">Посмотреть</button><br>
+    <button onclick="location.href='/getAllFromTsjInCurrentMonthExceptCredits'" class="seeListBtn">Посмотреть</button>
+    <br>
+    <a href="https://github.com/azamat2115/DocRegistration"><strong>Посмотреть исходники</strong></a>
 </div>
-
-
-<button onclick="location.href='/main'" class="regNewDocBtn">Добавить новый документ</button>
-
 </body>
 </html>
