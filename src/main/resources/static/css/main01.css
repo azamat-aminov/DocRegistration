@@ -140,3 +140,8 @@ input[type=submit]:hover {
 .required {
     color: red;
 }
+
+.duplicateRegNum {
+    color: red;
+    margin-left: 25%;
+}

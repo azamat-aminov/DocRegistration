@@ -36,7 +36,7 @@ public class DocController {
     @Autowired
     private CorrespondentTypeService correspondentTypeService;
     @Autowired
-    private RegistrationFormService registrationFormService;
+    private RegistrationFormService regFormService;
     @Value("${files.folder}")
     private String filesFolderPath;
 
@@ -56,47 +56,57 @@ public class DocController {
     }
 
     @PostMapping("/saveDocs")
-    public String someMethod(RegistrationForm registrationForm, Model model) throws IOException {
-        registrationFormService.saveAllData(registrationForm);
-        model.addAttribute("allData", registrationFormService.getAllData());
+    public String someMethod(RegistrationForm form, Model model) throws IOException {
+        if (regFormService.isDuplicateRegistrationNumber(form.getRegisterNumber())) {
+            model.addAttribute("isDuplicateRegisterNum", true);
+            model.addAttribute("regForm", form);
+
+            List<DeliveryType> allDelivery = deliveryService.getAllDelivery();
+            model.addAttribute("forms", allDelivery);
+
+            List<CorrespondentType> allCorrespondent = correspondentTypeService.getAllCorrespondent();
+            model.addAttribute("correspondents", allCorrespondent);
+            return "main";
+        }
+        regFormService.saveAllData(form);
+        model.addAttribute("allData", regFormService.getAllData());
         return "table";
     }
 
     @GetMapping("/getAllDocs")
     public String getAllDocs(Model model) {
-        model.addAttribute("allData", registrationFormService.getAllData());
+        model.addAttribute("allData", regFormService.getAllData());
         return "table";
     }
 
-
     @GetMapping("/getAllFromCentralBankViaEmailForCurrentMonth")
     public String getAllFromCentralBankViaEmailForCurrentMonth(Model model) {
-        model.addAttribute("allData", registrationFormService.getAllFromCentralBankViaEmailForCurrentMonth());
+        model.addAttribute("allData", regFormService.getAllFromCentralBankViaEmailForCurrentMonth());
         return "table";
     }
 
     @GetMapping("/getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier")
     public String getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier(Model model) {
-        model.addAttribute("allData", registrationFormService.getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier());
+        model.addAttribute("allData", regFormService.getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier());
         return "table";
     }
 
     @GetMapping("/getAllFromTsjInCurrentMonthExceptCredits")
     public String getAllFromTsjInCurrentMonthExceptCredits(Model model) {
-        model.addAttribute("allData", registrationFormService.getAllFromTsjInCurrentMonthExceptCredits());
+        model.addAttribute("allData", regFormService.getAllFromTsjInCurrentMonthExceptCredits());
         return "table";
     }
 
     @GetMapping("/data/by/{id}")
     public String getOneDocById(Model model, @PathVariable int id) {
-        IncomingDocumentsUI byId = registrationFormService.getById(id);
+        IncomingDocumentsUI byId = regFormService.getById(id);
         model.addAttribute("object", byId);
         return "moreInfoTable";
     }
 
     @GetMapping("/getFile/{id}")
     public ResponseEntity<Resource> getFile(@PathVariable int id, HttpServletResponse response) throws IOException {
-        IncomingDocuments docs = registrationFormService.getById(id);
+        IncomingDocuments docs = regFormService.getById(id);
         File fileToSend = new File(filesFolderPath + docs.getFilePathName());
 
         HttpHeaders headers = new HttpHeaders();

@@ -12,13 +12,29 @@
     <form action="/saveDocs" method="post" enctype="multipart/form-data" name="myForm"
           onsubmit="return validateAll()">
 
+        <div th:if="${isDuplicateRegisterNum}">
+            <div class="row">
+                <div class="col-25">
+                    <label for="registerNumber">Рег. №<span class="required">*</span></label>
+                </div>
 
-        <div class="row">
-            <div class="col-25">
-                <label for="registerNumber">Рег. №<span class="required">*</span></label>
+                <div class="col-50">
+                    <input type="text" id="registerNumber" name="registerNumber" th:value="${regForm.registerNumber}"
+                           placeholder="Рег. №..." required>
+                </div>
             </div>
-            <div class="col-50">
-                <input type="text" id="registerNumber" name="registerNumber" placeholder="Рег. №..." required>
+            <p class="duplicateRegNum"><br>Документ с таким Рег. № уже существует!</p>
+        </div>
+
+        <div th:unless="${isDuplicateRegisterNum}">
+            <div class="row">
+                <div class="col-25">
+                    <label for="registerNumber">Рег. №<span class="required">*</span></label>
+                </div>
+
+                <div class="col-50">
+                    <input type="text" id="registerNumber" name="registerNumber" placeholder="Рег. №..." required>
+                </div>
             </div>
         </div>
 

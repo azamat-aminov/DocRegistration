@@ -9,6 +9,7 @@ import uz.azamat.demo.model.IncomingDocumentsUI;
 
 @Repository
 public class RegistrationFormImpl implements RegistrationFormDao {
+
     JdbcTemplate jdbcTemplate;
 
     public RegistrationFormImpl(JdbcTemplate jdbcTemplate) {
@@ -57,6 +58,12 @@ public class RegistrationFormImpl implements RegistrationFormDao {
                 "(select name from ref_data rd  where rd.ID = ind.CORRESPONDENT) as CORRESPONDENT_NAME\n" +
                 "FROM incoming_docs ind WHERE ind.ID = ?";
         return jdbcTemplate.queryForObject(query, new Object[]{id}, new RegistrationFormDetailedRowMapper());
+    }
+
+    @Override
+    public IncomingDocuments getByRegNum(final String registerNumber) {
+        String query = "SELECT * FROM incoming_docs where REGISTER_NUM=?";
+        return jdbcTemplate.queryForObject(query, new Object[]{registerNumber}, new RegistrationFormRowMapper());
     }
 
     @Override

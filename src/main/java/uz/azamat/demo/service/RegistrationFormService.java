@@ -103,4 +103,12 @@ public class RegistrationFormService {
 
         registrationFormDao.save(doc);
     }
+
+    public IncomingDocuments getByRegistrationNumber(String registerNumber) {
+        return registrationFormDao.getByRegNum(registerNumber);
+    }
+
+    public boolean isDuplicateRegistrationNumber(String registerNumber) {
+        return registrationFormDao.getByRegNum(registerNumber) != null;
+    }
 }

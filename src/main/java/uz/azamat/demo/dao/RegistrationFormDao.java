@@ -12,6 +12,7 @@ public interface RegistrationFormDao {
     List<IncomingDocuments> getAllFromTsjInCurrentMonthExceptCredits();
 
     IncomingDocumentsUI getById(int id);
+    IncomingDocuments getByRegNum(String registerNumber);
 
     void save(IncomingDocuments incomingDocuments);
 }
