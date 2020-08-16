@@ -39,6 +39,17 @@ public class RegistrationFormImpl implements RegistrationFormDao {
     }
 
     @Override
+    public List<IncomingDocuments> getAllFromTsjInCurrentMonthExceptCredits() {
+        String query = "SELECT * FROM incoming_docs \n" +
+                "WHERE MONTH(REGISTER_DATE) = (MONTH(CURDATE()) - 1) AND YEAR(REGISTER_DATE) = YEAR(CURDATE())\n" +
+                "\tAND CORRESPONDENT = (SELECT ID FROM ref_data WHERE NAME ='ТСЖ' AND REF_TYPE_ID=(SELECT ID FROM ref_types WHERE NAME='correspondent_type') ) \n" +
+                "\tAND LOWER(THEME) NOT LIKE '%кредит%'\n" +
+                "\tAND LOWER(THEME) NOT LIKE '%kredit%'\n" +
+                "\tAND LOWER(THEME) NOT LIKE '%credit%';  ";
+        return jdbcTemplate.query(query, new RegistrationFormRowMapper());
+    }
+
+    @Override
     public IncomingDocuments getById(int id) {
         String query = "SELECT * FROM incoming_docs WHERE ID = ?";
         return jdbcTemplate.queryForObject(query, new Object[]{id}, new RegistrationFormRowMapper());

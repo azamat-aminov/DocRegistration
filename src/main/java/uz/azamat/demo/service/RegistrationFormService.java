@@ -40,6 +40,10 @@ public class RegistrationFormService {
         return registrationFormDao.getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier();
     }
 
+    public List<IncomingDocuments> getAllFromTsjInCurrentMonthExceptCredits() {
+        return registrationFormDao.getAllFromTsjInCurrentMonthExceptCredits();
+    }
+
     public void saveAllData(RegistrationForm registrationForm) throws IOException {
 
         IncomingDocuments doc = new IncomingDocuments();

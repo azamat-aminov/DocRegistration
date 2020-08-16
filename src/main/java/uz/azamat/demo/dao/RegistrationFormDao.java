@@ -8,6 +8,7 @@ public interface RegistrationFormDao {
     List<IncomingDocuments> getAllData();
     List<IncomingDocuments> getAllFromCentralBankViaEmailForCurrentMonth();
     List<IncomingDocuments> getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier();
+    List<IncomingDocuments> getAllFromTsjInCurrentMonthExceptCredits();
 
     IncomingDocuments getById(int id);
 

@@ -73,8 +73,12 @@ AND NOT (CORRESPONDENT = (SELECT ID FROM ref_data WHERE NAME ='ГНИ' AND REF_T
 		AND DELIVERY_TYPE = (SELECT ID FROM ref_data WHERE NAME ='Курьер' AND REF_TYPE_ID=(SELECT ID FROM ref_types WHERE NAME='delivery_type')));
 
 Предоставить список документов за предыдущий месяц, поступивших от ТСЖ, исключая документы о предоставления кредита (в теме писем от корреспондентов будет встречаться слово кредит).
-SELECT * FROM incoming_docs WHERE (REGISTER_DATE BETWEEN '2020-07-01' AND '2020-07-31')
-AND CORRESPONDENT = (SELECT ID FROM ref_data  WHERE NAME ='ТСЖ') AND THEME NOT LIKE '%кредит%';
+SELECT * FROM incoming_docs
+WHERE MONTH(REGISTER_DATE) = (MONTH(CURDATE()) - 1) AND YEAR(REGISTER_DATE) = YEAR(CURDATE())
+	AND CORRESPONDENT = (SELECT ID FROM ref_data WHERE NAME ='ТСЖ' AND REF_TYPE_ID=(SELECT ID FROM ref_types WHERE NAME='correspondent_type') )
+	AND LOWER(THEME) NOT LIKE '%кредит%'
+	AND LOWER(THEME) NOT LIKE '%kredit%'
+	AND LOWER(THEME) NOT LIKE '%credit%';
 
 
 

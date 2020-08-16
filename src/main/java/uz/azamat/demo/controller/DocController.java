@@ -80,6 +80,12 @@ public class DocController {
         return "table";
     }
 
+    @GetMapping("/getAllFromTsjInCurrentMonthExceptCredits")
+    public String getAllFromTsjInCurrentMonthExceptCredits(Model model) {
+        model.addAttribute("allData", registrationFormService.getAllFromTsjInCurrentMonthExceptCredits());
+        return "table";
+    }
+
     @GetMapping("/data/by/{id}")
     public String getOneDocById(Model model, @PathVariable int id) {
         IncomingDocuments byId = registrationFormService.getById(id);
