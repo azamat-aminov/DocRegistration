@@ -21,6 +21,15 @@ public class RegistrationFormImpl implements RegistrationFormDao {
     }
 
     @Override
+    public List<IncomingDocuments> getAllFromCentralBankViaEmailForCurrentMonth() {
+        String query = "SELECT * FROM incoming_docs \n" +
+                "WHERE (MONTH(REGISTER_DATE) = MONTH(CURDATE()) AND YEAR(REGISTER_DATE) = YEAR(CURDATE()))\n" +
+                "AND CORRESPONDENT=(SELECT ID FROM ref_data WHERE NAME ='ЦБ' AND REF_TYPE_ID = (SELECT ID FROM ref_types WHERE NAME='correspondent_type')) \n" +
+                "AND DELIVERY_TYPE=(SELECT ID FROM ref_data WHERE NAME ='Email' AND REF_TYPE_ID = (SELECT ID FROM ref_types WHERE NAME='delivery_type')); ";
+        return jdbcTemplate.query(query, new RegistrationFormRowMapper());
+    }
+
+    @Override
     public IncomingDocuments getById(int id) {
         String query = "SELECT * FROM incoming_docs WHERE ID = ?";
         return jdbcTemplate.queryForObject(query, new Object[]{id}, new RegistrationFormRowMapper());

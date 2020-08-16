@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface RegistrationFormDao {
     List<IncomingDocuments> getAllData();
+    List<IncomingDocuments> getAllFromCentralBankViaEmailForCurrentMonth();
 
     IncomingDocuments getById(int id);
 

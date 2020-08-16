@@ -67,6 +67,13 @@ public class DocController {
         return "table";
     }
 
+
+    @GetMapping("/getAllFromCentralBankViaEmailForCurrentMonth")
+    public String getAllFromCentralBankViaEmailForCurrentMonth(Model model) {
+        model.addAttribute("allData", registrationFormService.getAllFromCentralBankViaEmailForCurrentMonth());
+        return "table";
+    }
+
     @GetMapping("/data/by/{id}")
     public String getOneDocById(Model model, @PathVariable int id) {
         IncomingDocuments byId = registrationFormService.getById(id);

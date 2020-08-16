@@ -61,8 +61,10 @@ ALTER TABLE edocs.incoming_docs MODIFY COLUMN OUTGOING_NUM varchar(256) CHARACTE
 ALTER TABLE edocs.incoming_docs MODIFY COLUMN OUTGOING_DATE date NULL;
 
 Предоставить список документов, поступивших от ЦБ (центрального банка) по электронной почте за текущий месяц.
-SELECT * FROM incoming_docs WHERE (REGISTER_DATE BETWEEN '2020-08-01' AND '2020-08-31') AND CORRESPONDENT =
-(SELECT ID FROM ref_data  WHERE NAME ='ЦБ') AND DELIVERY_TYPE =(SELECT ID FROM ref_data  WHERE NAME ='Email');
+SELECT * FROM incoming_docs
+WHERE (MONTH(REGISTER_DATE) = MONTH(CURDATE()) AND YEAR(REGISTER_DATE) = YEAR(CURDATE()))
+AND CORRESPONDENT=(SELECT ID FROM ref_data WHERE NAME ='ЦБ' AND REF_TYPE_ID = (SELECT ID FROM ref_types WHERE NAME='correspondent_type'))
+AND DELIVERY_TYPE=(SELECT ID FROM ref_data WHERE NAME ='Email' AND REF_TYPE_ID = (SELECT ID FROM ref_types WHERE NAME='delivery_type'));
 
 Предоставить список документов за 1 квартал текущего года, кроме поступивших из ГНИ с доставкой курьером.
 SELECT * FROM incoming_docs WHERE (REGISTER_DATE BETWEEN '2020-01-01' AND '2020-03-31')

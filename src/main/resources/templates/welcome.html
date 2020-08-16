@@ -19,15 +19,16 @@
 <div class="select-sql"><p><strong>Предоставить список документов, поступивших от ЦБ (центрального банка) по
     электронной почте за текущий
     месяц.</strong></p>
-    <p>
-        <span style="color: #820b03">SELECT * FROM</span> incoming_docs <span style="color: #820b03">WHERE</span>
-        (REGISTER_DATE <span style="color: #820b03">BETWEEN</span><span style="color: #fc53b6">'2020-08-01'</span>
-        <span style="color: #820b03">AND</span> <span style="color: #fc53b6">'2020-08-31'</span>) <span
-            style="color: #820b03">AND</span> CORRESPONDENT =(<span style="color: #820b03">SELECT</span> ID <span
-            style="color: #820b03">FROM</span> ref_data <span style="color: #820b03">WHERE</span> NAME ='ЦБ')
-        <span style="color: #820b03">AND</span> DELIVERY_TYPE =(<span style="color: #820b03">SELECT</span> ID <span
-            style="color: #820b03">FROM</span> ref_data <span style="color: #820b03">WHERE</span> NAME ='Email');
+    <p><code>
+        SELECT * FROM incoming_docs
+        WHERE (MONTH(REGISTER_DATE) = MONTH(CURDATE()) AND YEAR(REGISTER_DATE) = YEAR(CURDATE()))
+        AND CORRESPONDENT=(SELECT ID FROM ref_data WHERE NAME ='ЦБ' AND REF_TYPE_ID = (SELECT ID FROM ref_types WHERE
+        NAME='correspondent_type'))
+        AND DELIVERY_TYPE=(SELECT ID FROM ref_data WHERE NAME ='Email' AND REF_TYPE_ID = (SELECT ID FROM ref_types WHERE
+        NAME='delivery_type'));
+    </code>
     </p>
+    <button onclick="location.href='/getAllFromCentralBankViaEmailForCurrentMonth'" class="regNewDocBtn">Посмотреть</button><br>
     <p><strong>Предоставить список документов за 1 квартал текущего года, кроме поступивших из ГНИ с доставкой
         курьером.</strong></p>
     <p>
