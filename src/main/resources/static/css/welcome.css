@@ -24,3 +24,21 @@ input[type=submit] {
     padding: 2px;
 
 }
+
+.regNewDocBtn {
+    width: 15%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 3px;
+    margin-right: 5px;
+    float: right;
+    display: inline-block;
+}
+
+.regNewDocBtn:hover {
+    background-color: black;
+}
