@@ -32,15 +32,14 @@
     <p><strong>Предоставить список документов за 1 квартал текущего года, кроме поступивших из ГНИ с доставкой
         курьером.</strong></p>
     <p>
-        <span style="color: #820b03">SELECT * FROM</span> incoming_docs <span style="color: #820b03">WHERE</span>
-        (REGISTER_DATE <span style="color: #820b03">BETWEEN</span> <span style="color: #fc53b6">'2020-01-01'</span>
-        <span style="color: #820b03">AND</span> <span style="color: #fc53b6">'2020-03-31'</span>) <span
-            style="color: #820b03">AND</span> <span
-            style="color: #820b03">NOT</span> (CORRESPONDENT =(<span style="color: #820b03">SELECT</span> ID <span
-            style="color: #820b03">FROM</span> ref_data <span style="color: #820b03">WHERE</span> NAME ='ГНИ')
-        <span style="color: #820b03">AND</span> DELIVERY_TYPE =(<span style="color: #820b03">SELECT</span> ID <span
-            style="color: #820b03">FROM</span> ref_data <span style="color: #820b03">WHERE</span> NAME ='Курьер'));
+        <code>
+            SELECT * FROM incoming_docs
+            WHERE (MONTH(REGISTER_DATE) < 4 AND YEAR(REGISTER_DATE) = YEAR(CURDATE()))
+            AND NOT (CORRESPONDENT = (SELECT ID FROM ref_data WHERE NAME ='ГНИ' AND REF_TYPE_ID=(SELECT ID FROM ref_types WHERE NAME='correspondent_type'))
+            AND DELIVERY_TYPE = (SELECT ID FROM ref_data WHERE NAME ='Курьер' AND REF_TYPE_ID=(SELECT ID FROM ref_types WHERE NAME='delivery_type')));
+        </code>
     </p>
+    <button onclick="location.href='/getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier'" class="regNewDocBtn">Посмотреть</button><br>
 
     <p><strong>Предоставить список документов за предыдущий месяц, поступивших от ТСЖ, исключая документы о
         предоставления кредита (в теме писем от корреспондентов будет встречаться слово кредит).</strong></p>

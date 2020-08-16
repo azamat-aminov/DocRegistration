@@ -36,6 +36,10 @@ public class RegistrationFormService {
         return registrationFormDao.getAllFromCentralBankViaEmailForCurrentMonth();
     }
 
+    public List<IncomingDocuments> getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier() {
+        return registrationFormDao.getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier();
+    }
+
     public void saveAllData(RegistrationForm registrationForm) throws IOException {
 
         IncomingDocuments doc = new IncomingDocuments();

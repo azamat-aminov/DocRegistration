@@ -74,6 +74,12 @@ public class DocController {
         return "table";
     }
 
+    @GetMapping("/getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier")
+    public String getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier(Model model) {
+        model.addAttribute("allData", registrationFormService.getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier());
+        return "table";
+    }
+
     @GetMapping("/data/by/{id}")
     public String getOneDocById(Model model, @PathVariable int id) {
         IncomingDocuments byId = registrationFormService.getById(id);

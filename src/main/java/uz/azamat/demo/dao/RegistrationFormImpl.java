@@ -25,7 +25,16 @@ public class RegistrationFormImpl implements RegistrationFormDao {
         String query = "SELECT * FROM incoming_docs \n" +
                 "WHERE (MONTH(REGISTER_DATE) = MONTH(CURDATE()) AND YEAR(REGISTER_DATE) = YEAR(CURDATE()))\n" +
                 "AND CORRESPONDENT=(SELECT ID FROM ref_data WHERE NAME ='ЦБ' AND REF_TYPE_ID = (SELECT ID FROM ref_types WHERE NAME='correspondent_type')) \n" +
-                "AND DELIVERY_TYPE=(SELECT ID FROM ref_data WHERE NAME ='Email' AND REF_TYPE_ID = (SELECT ID FROM ref_types WHERE NAME='delivery_type')); ";
+                "AND DELIVERY_TYPE=(SELECT ID FROM ref_data WHERE NAME ='Email' AND REF_TYPE_ID = (SELECT ID FROM ref_types WHERE NAME='delivery_type')) ";
+        return jdbcTemplate.query(query, new RegistrationFormRowMapper());
+    }
+
+    @Override
+    public List<IncomingDocuments> getAllForFirstQuarterOfThisYearExceptFromGniViaCurrier() {
+        String query = "SELECT * FROM incoming_docs \n" +
+                "WHERE (MONTH(REGISTER_DATE) < 4 AND YEAR(REGISTER_DATE) = YEAR(CURDATE())) \n" +
+                "AND NOT (CORRESPONDENT = (SELECT ID FROM ref_data WHERE NAME ='ГНИ' AND REF_TYPE_ID=(SELECT ID FROM ref_types WHERE NAME='correspondent_type')) \n" +
+                "\t\tAND DELIVERY_TYPE = (SELECT ID FROM ref_data WHERE NAME ='Курьер' AND REF_TYPE_ID=(SELECT ID FROM ref_types WHERE NAME='delivery_type'))) ";
         return jdbcTemplate.query(query, new RegistrationFormRowMapper());
     }
 
