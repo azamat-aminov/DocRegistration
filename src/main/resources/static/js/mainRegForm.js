@@ -24,16 +24,19 @@ function compareDate() {
 }
 
 function validateSize(file) {
+    console.log("validateSize()");
     const fileSize = file.files[0].size / 1024 / 1024; // in MB
     if (fileSize > 1) {
         alert("Размер файла превышает 1 МБ. Пожалуйста, выберите файл размером менее 1 МБ!");
         file.value = "";
         return false;
+    } else {
+        return true;
     }
-    // validateExtension();
 }
 
 function validateExtension() {
+    console.log("validateExtension()");
     const fileName = document.getElementById("file");
     if (fileName.value.endsWith(".doc") || fileName.value.endsWith(".pdf") || fileName.value.endsWith(".docx")) {
         return true;
@@ -49,4 +52,11 @@ function validateAll() {
     let isValidDeadLine = compareDate();
 
     return isValidDeadLine && isValidRegistrationNumber;
+}
+
+function validateFile(file) {
+    let isValidExtension = validateExtension()
+    let isValidFileSize = validateSize(file);
+
+    return isValidExtension && isValidFileSize;
 }

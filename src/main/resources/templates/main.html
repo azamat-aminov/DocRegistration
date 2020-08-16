@@ -131,13 +131,13 @@
 
         <div class="row">
 
-            <label for="file" class="custom-file-upload"><i class="fa fa-cloud-upload"></i>Выбрать файл<span
+            <label for="file" class="custom-file-upload">Выбрать файл<span
                     class="required">*</span></label>
 
             <input type="file" accept="application/pdf, application/msword"
                    name="file"
                    id="file" style="display: none"
-                   onchange="return validateSize(this) & validateExtension()">
+                   onchange="return validateExtension()">
             <input id="uploadFile" placeholder="no file" disabled="disabled">
 
         </div>
