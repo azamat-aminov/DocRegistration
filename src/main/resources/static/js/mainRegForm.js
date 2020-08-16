@@ -23,9 +23,11 @@ function compareDate() {
     }
 }
 
-function validateSize(file) {
+function validateSize() {
     console.log("validateSize()");
-    const fileSize = file.files[0].size / 1024 / 1024; // in MB
+    let file = document.getElementById("file");
+    let fileSize = file.files[0].size / 1024 / 1024; // in MB
+    console.log("fileSize = " + fileSize)
     if (fileSize > 1) {
         alert("Размер файла превышает 1 МБ. Пожалуйста, выберите файл размером менее 1 МБ!");
         file.value = "";
@@ -37,8 +39,8 @@ function validateSize(file) {
 
 function validateExtension() {
     console.log("validateExtension()");
-    const fileName = document.getElementById("file");
-    if (fileName.value.endsWith(".doc") || fileName.value.endsWith(".pdf") || fileName.value.endsWith(".docx")) {
+    let fileName = document.getElementById("file").value;
+    if (fileName.endsWith(".doc") || fileName.endsWith(".pdf") || fileName.endsWith(".docx")) {
         return true;
     } else {
         alert("Неправильное расширение файла!")
@@ -50,13 +52,25 @@ function validateExtension() {
 function validateAll() {
     let isValidRegistrationNumber = validateRegNum();
     let isValidDeadLine = compareDate();
+        if (isValidDeadLine && isValidRegistrationNumber) {
+            let file = document.getElementById("file").value;
+            if (file) {
+                console.log(file);
+                // return false;
+                let isValidFile =  validateFile();
+                return isValidFile;
+            } else {
+                window.alert("Файл не выбран!");
+                return false;
+            }
+        }
 
     return isValidDeadLine && isValidRegistrationNumber;
 }
 
-function validateFile(file) {
+function validateFile() {
     let isValidExtension = validateExtension()
-    let isValidFileSize = validateSize(file);
+    let isValidFileSize = validateSize();
 
     return isValidExtension && isValidFileSize;
 }
