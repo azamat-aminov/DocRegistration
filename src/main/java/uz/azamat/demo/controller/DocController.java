@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import uz.azamat.demo.model.CorrespondentType;
 import uz.azamat.demo.model.DeliveryType;
 import uz.azamat.demo.model.IncomingDocuments;
+import uz.azamat.demo.model.IncomingDocumentsUI;
 import uz.azamat.demo.model.RegistrationForm;
 import uz.azamat.demo.service.CorrespondentTypeService;
 import uz.azamat.demo.service.DeliveryService;
@@ -88,7 +89,7 @@ public class DocController {
 
     @GetMapping("/data/by/{id}")
     public String getOneDocById(Model model, @PathVariable int id) {
-        IncomingDocuments byId = registrationFormService.getById(id);
+        IncomingDocumentsUI byId = registrationFormService.getById(id);
         model.addAttribute("object", byId);
         return "moreInfoTable";
     }

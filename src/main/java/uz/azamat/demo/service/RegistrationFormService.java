@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import uz.azamat.demo.dao.RegistrationFormDao;
 import uz.azamat.demo.model.IncomingDocuments;
+import uz.azamat.demo.model.IncomingDocumentsUI;
 import uz.azamat.demo.model.RegistrationForm;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class RegistrationFormService {
     @Value("${files.folder}")
     private String filesFolderPath;
 
-    public IncomingDocuments getById(int id) {
+    public IncomingDocumentsUI getById(int id) {
         return registrationFormDao.getById(id);
     }
 

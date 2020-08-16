@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import uz.azamat.demo.model.IncomingDocuments;
 
 import java.util.List;
+import uz.azamat.demo.model.IncomingDocumentsUI;
 
 @Repository
 public class RegistrationFormImpl implements RegistrationFormDao {
@@ -50,9 +51,12 @@ public class RegistrationFormImpl implements RegistrationFormDao {
     }
 
     @Override
-    public IncomingDocuments getById(int id) {
-        String query = "SELECT * FROM incoming_docs WHERE ID = ?";
-        return jdbcTemplate.queryForObject(query, new Object[]{id}, new RegistrationFormRowMapper());
+    public IncomingDocumentsUI getById(int id) {
+        String query = "SELECT ind.*, \n" +
+                "(select name from ref_data rd  where rd.ID = ind.DELIVERY_TYPE) as DELIVERY_TYPE_NAME,\n" +
+                "(select name from ref_data rd  where rd.ID = ind.CORRESPONDENT) as CORRESPONDENT_NAME\n" +
+                "FROM incoming_docs ind WHERE ind.ID = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, new RegistrationFormDetailedRowMapper());
     }
 
     @Override

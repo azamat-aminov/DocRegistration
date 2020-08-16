@@ -26,11 +26,11 @@
     </tr>
     <tr th:each="data : ${object}">
         <th>Форма доставки</th>
-        <td th:utext="${data.deliveryType}"></td>
+        <td th:utext="${data.deliveryTypeName}"></td>
     </tr>
     <tr th:each="data : ${object}">
         <th>Корреспондент</th>
-        <td th:utext="${data.correspondent}"></td>
+        <td th:utext="${data.correspondentName}"></td>
     </tr>
     <tr th:each="data : ${object}">
         <th>Тема</th>
@@ -46,11 +46,11 @@
     </tr>
     <tr th:each="data : ${object}">
         <th>Доступ</th>
-        <td th:utext="${data.access}"></td>
+        <td th:utext="${data.accessName}"></td>
     </tr>
     <tr th:each="data : ${object}">
         <th>Контроль</th>
-        <td th:utext="${data.control}"></td>
+        <td th:utext="${data.controlName}"></td>
     </tr>
     <tr th:each="data : ${object}">
         <th>Файл</th>
